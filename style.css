@@ -1,0 +1,128 @@
+body {
+    margin: 0;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-color: #f0e68c; /* Jaune pastel */
+    color: #333;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: #ff69b4; /* Rose vif */
+    border-bottom: 5px solid #ff1493; /* Rose foncé */
+}
+
+.logo {
+    font-size: 48px;
+    margin: 14px;
+    flex-grow: 1;
+    color: #fff;
+}
+
+.menu-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.menu-icon {
+    font-size: 50px;
+    cursor: pointer;
+    margin-right: 20px;
+    color: #fff;
+}
+
+.overlay {
+    display: none; /* Masqué par défaut */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Assurez-vous que la couleur est semi-transparente */
+    z-index: 10;
+}
+
+.search-bar {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    width: 300px;
+    height: 50px;
+    transition: right 0.8s ease;
+    z-index: 20;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.search-bar.active {
+    right: 15%;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.search-bar input {
+    width: 100%;
+    height: 80%;
+    padding: 10px;
+    margin-top: 40px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    border-radius: 25px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.search-icon {
+    background: none;
+    font-size: 35px;
+    border: none;
+    cursor: pointer;
+    margin-top: 8px;
+    padding: 5px;
+    color: #ffffff; /* Rose vif */
+}
+
+main {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+section {
+    flex: 1;
+    margin: 0 10px;
+    background-color: #ffb3e6; /* Rose clair */
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    transition: transform 0.3s;
+}
+
+section:hover {
+    transform: scale(1.05); /* Effet de zoom sur hover */
+}
+
+section h2 {
+    text-align: center;
+    color: #ff1493; /* Rose foncé */
+}
+
+a {
+    text-decoration: none;
+    color: #ff1493; /* Rose foncé */
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #ff69b4; /* Rose vif */
+    color: #fff;
+}

@@ -1,0 +1,411 @@
+body {
+    margin: 0;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-color: #b3cde0; 
+    color: #333;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: #ff69b4; /* Rose vif */
+    border-bottom: 5px solid #ff1493; /* Rose foncé */
+}
+
+.logo {
+    font-size: 48px;
+    margin: 14px;
+    flex-grow: 1;
+    color: #fff;
+}
+
+.menu-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.menu-icon {
+    font-size: 50px;
+    cursor: pointer;
+    margin-right: 20px;
+    color: #fff;
+}
+
+.overlay {
+    display: none; /* Masqué par défaut */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.search-bar {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    width: 300px;
+    height: 50px;
+    transition: right 0.8s ease;
+    z-index: 20;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.search-bar.active {
+    right: 15%;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.search-bar input {
+    width: 100%;
+    height: 80%;
+    padding: 10px;
+    margin-top: 40px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    border-radius: 25px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.search-icon {
+    background: none;
+    font-size: 35px;
+    border: none;
+    cursor: pointer;
+    margin-top: 8px;
+    padding: 5px;
+    color: #ffffff; /* Rose vif */
+}
+
+main {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+section {
+    flex: 1;
+    margin: 0 10px;
+    background-color: #ffb3e6; /* Rose clair */
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    transition: transform 0.3s;
+}
+
+section:hover {
+    transform: scale(1.05); /* Effet de zoom sur hover */
+}
+
+section h2 {
+    text-align: center;
+    color: #ff1493; /* Rose foncé */
+}
+
+a {
+    text-decoration: none;
+    color: #ff1493; /* Rose foncé */
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #ff69b4; /* Rose vif */
+    color: #fff;
+}
+
+#game-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    border: 2px solid #333;
+    overflow: hidden;
+}
+
+#dino {
+    position: absolute;
+    bottom: 0;
+    left: 50px; /* Ajuste selon ton besoin */
+    width: 80px; /* Ajuster la taille selon tes besoins */
+    height: 80px;
+    background-image: url('images/image0-removebg-preview.png'); /* Remplacer par ton image propre */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent; /* Assurez-vous que le background est transparent */
+    margin: 0; /* Assurez-vous qu'il n'y a pas de margin qui perturbe */
+    padding: 0; /* Assurez-vous qu'il n'y a pas de padding */
+    border: none; /* Aucune bordure visible ou invisible */
+    transform: scaleY(1) rotate(0deg); /* Taille normale et sans rotation */
+    transform-origin: bottom; /* Point d'ancrage en bas */
+    transition: transform 0.2s ease-in-out; /* Transition douce pour l'animation */
+}
+
+
+#dino-collision {
+    position: absolute;
+    bottom: 0;
+    left: 50px;
+    width: 60px;  /* Largeur de la zone de collision */
+    height: 60px; /* Hauteur de la zone de collision */
+    background-color: transparent; /* Fond transparent */
+}
+/* Ajout du fond de couleur désert */
+#game-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    border: 2px solid #333;
+    overflow: hidden;
+    background-color: #f4e285; /* Jaune clair pour l'effet désert */
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* Décorations GIF pour l'ambiance */
+.decoration {
+    position: absolute;
+    bottom: 0;
+    width: 100px;
+    height: 100px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none; /* Les GIFs ne doivent pas interagir avec le gameplay */
+}
+
+.cactus-decoration {
+    left: 60%;
+    background-image: url('images/gifcactus.gif'); /* Exemple de cactus animé */
+}
+
+.sun-decoration {
+    top: 10px;
+    right: 5%;
+    width: 100px;
+    height: 100px;
+    background-image: url('images/gifsoleil.gif'); /* Exemple de soleil animé */
+}
+
+.obstacle {
+    position: absolute;
+    margin-top: 147px;
+    width: 60px; /* Taille de l'obstacle, ajuste en fonction de ton image */
+    height: 200px;
+    background-image: url('images/—Pngtree—cactus_5990771 2 (1).png'); /* Assure-toi que le chemin est correct */
+    background-size: contain; /* Ajuste l'image à la taille de l'obstacle */
+    background-repeat: no-repeat; /* Empêche l'image de se répéter */
+    background-color: transparent; /* Supprime la couleur de fond marron */
+}
+
+#current-score {
+    position: absolute;
+    left: 10px;
+    font-size: 20px;
+    color: #333;
+    margin-left: 220px;
+}
+
+#score-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#best-score, #score {
+    font-size: 20px;
+    color: #333;
+}
+#total-score{
+    margin-left: 180px;
+    font-size: 20px;
+    top: 10px;
+    color: #333;
+}
+
+#dino.jump {
+    animation: jump-animation 1.7s ease-out; /* Durée de saut augmentée pour plus de fluidité */
+}
+
+/* Animation pour simuler le saut */
+@keyframes jump-animation {
+    0% { bottom: 0; }
+    25% { bottom: 100px; } /* Montée à 100px à 25% du temps */
+    50% { bottom: 0; }  /* Légère descente à 50% */
+    75% { bottom: 0; }  /* Presque au sol à 75% */
+    100% { bottom: 0; }    /* Retour au sol */
+}
+
+
+#dino.crouch {
+    transform: scaleY(0.65) rotate(5deg); /* Réduction de la taille et légère rotation */
+    transform-origin: bottom; /* Fixer le point de transformation au bas du dinosaure */
+    transition: transform 0.05s ease-in-out; /* Transition douce */
+}
+
+.game-over {
+    display: none; /* Masqué par défaut */
+    position: fixed;
+    top: 141px;
+    left: 0;
+    width: 100%;
+    height: 202px;
+    background-color: rgba(0, 0, 0, 0.8); /* Fond noir semi-transparent */
+    color: white;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    z-index: 20; /* Z-index pour le rendre au-dessus du jeu */
+}
+
+.game-over-message {
+    background: #ff1493; /* Rose foncé pour le message */
+    padding: 20px;
+    border-radius: 15px;
+}
+
+#restart-button {
+    background-color: #ff69b4; /* Rose vif */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+#restart-button:hover {
+    background-color: #ff1493; /* Changer de couleur au survol */
+}
+.obstacle-flying {
+    position: absolute;
+    top: 84px; /* Ajuste cette valeur si nécessaire */
+    left: 100%; /* Commence à droite de l'écran */
+    width: 75px; /* Largeur de l'obstacle */
+    height: 70px; /* Hauteur de l'obstacle */
+    background-image: url('images/oiseau-removebg-preview.png'); /* Image de l'obstacle */
+    background-size: contain; /* Assure que l'image est redimensionnée correctement */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    background-color: transparent; /* Couleur de fond transparente */
+}
+#coin-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#coin-display  {
+    font-size: 50px;
+
+    width: auto; /* Ajuste la largeur automatiquement */
+    display: flex; /* Utilisation de flexbox pour l'alignement */
+    align-items: center; /* Centre l'image et le texte verticalement */
+    border: #333;
+    background-color: #ffffff;
+}
+
+.coingif {
+    font-size: 24px;
+    bottom: 0;
+}
+#drop-button {
+    background-color: #ff69b4;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    margin-top: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#drop-button:hover {
+    background-color: #ff1493;
+}
+
+#roulette-section {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+#roulette-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: red;
+    left: 50%;
+}
+
+#roulette-items {
+    display: flex;
+    overflow: hidden;
+    width: 500px;
+    height: 100px;
+    border: 2px solid #333;
+    margin-top: 20px;
+    transition: transform 2s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+#skins-section {
+    margin-top: 40px;
+    text-align: center;
+}
+
+#skin-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.skin-item {
+    width: 80px;
+    height: 80px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+}
+
+.skin-common {
+    border-color: gray;
+}
+
+.skin-rare {
+    border-color: blue;
+}
+
+.skin-epic {
+    border-color: purple;
+}
+
+.filter-button {
+    padding: 5px 10px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dino Jump Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Un Reymond Qui Joue</div>
+        <div class="menu-container">
+            <div class="search-container">
+                <button class="search-icon" aria-label="Search" onclick="toggleSearch()">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <span class="menu-icon">☰</span>
+        </div>
+    </header>
+    
+    <div class="overlay" id="overlay" onclick="toggleSearch()"></div>
+    <div class="search-bar" id="searchBar">
+        <input type="text" placeholder="Rechercher..." autofocus>
+    </div>
+
+    <div id="game-container">
+        <div class="decoration cactus-decoration"></div>
+        <div class="decoration sun-decoration"></div>
+        <div id="dino"></div>
+        <div id="score-container">
+            <div id="current-score">Score: 0</div>
+            <div id="best-score">Meilleur Score: 0</div>
+            <div id="total-score">Score Total: 0m 0s</div>
+        </div>
+        
+        <div id="game-over" class="game-over" style="display: none;">
+            <div class="game-over-message">
+                <h2>Game Over</h2>
+                <div id="game-over-score">Score: 0</div>
+                <div id="game-over-best-score">Meilleur Score: 0</div>
+                <button id="restart-button" onclick="restartGame()">Nouvelle Partie</button>
+            </div>
+        </div>
+    </div>
+    <!-- Ajouter cette section dans ton HTML en dessous du jeu -->
+<div id="coin-section">
+    <div class="coingif"><img src="images/coin gif.gif" width="62px" height="62px"></div>
+    <div id="coin-display">0 </div>
+    
+    <button id="drop-button">Obtenir un skin</button>
+    <div id="roulette-section" class="hidden">
+        <div id="roulette-line"></div>
+        <div id="roulette-items"></div>
+    </div>
+</div>
+<!-- Ajouter cette section pour l'affichage de tous les skins sous la roulette -->
+<div id="skins-section">
+    <h3>Mes Skins</h3>
+    <div id="skin-filter">
+        <button class="filter-button" data-rarity="all">Tous</button>
+        <button class="filter-button" data-rarity="common">Commun</button>
+        <button class="filter-button" data-rarity="rare">Rare</button>
+        <button class="filter-button" data-rarity="epic">Épique</button>
+    </div>
+    <div id="skin-gallery"></div>
+</div>
+
+    <script src="dinausor.js"></script>
+</body>
+</html>

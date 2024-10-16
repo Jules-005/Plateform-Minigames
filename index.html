@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un Reymond Qui Joue</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+    <header>
+    <div class="logo">Un Reymond Qui Joue</div>
+        <div class="menu-container">
+            <div class="search-container">
+                <button class="search-icon" aria-label="Search" onclick="toggleSearch()">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <span class="menu-icon">☰</span>
+        </div>
+    </header>
+    
+    <div class="overlay" id="overlay" onclick="toggleSearch()"></div>
+    <div class="search-bar" id="searchBar">
+        <input type="text" placeholder="Rechercher..." autofocus>
+    </div>
+    
+    <main>
+        <section class="tendance">
+            <a href="jeu/dinausor.html"><h2>Dino Jump Game</h2></a>
+        </section>
+        <section class="innoubliable">
+            <a href="jeu2.html"><h2>Inoubliables</h2></a>
+        </section>
+        <section class="pépite">
+            <a href="jeu3.html"><h2>Pépites</h2></a>
+        </section>
+        <section class="nouveautée">
+            <a href="jeu4.html"><h2>Nouveautées</h2></a>
+        </section>
+    </main>
+    
+    <footer>
+        Un Reymond Qui Joue
+    </footer>
+    
+    <script src="java.js"></script>
+</body>
+</html>
