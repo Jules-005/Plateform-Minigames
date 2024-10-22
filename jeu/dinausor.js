@@ -14,11 +14,18 @@ let gameStarted = false; // Indique si le jeu a commencé
 let timeElapsed = 0; // Temps écoulé en secondes
 let scoreInterval; // Intervalle pour mettre à jour le score
 let scoreUpdated = false; // État pour savoir si le score a déjà été mis à jour à la mort
+let currentObstacleSkin = null; // Pour les obstacles normaux
+let currentFlyingObstacleSkin = null; // Pour les obstacles volants
 
 document.addEventListener('keydown', function(event) {
     const dino = document.getElementById('dino');
 
-    if (event.code === 'Space' && !isGameOver) {
+    // Empêche le comportement par défaut des touches
+    if (event.code === 'Space' || event.code === 'ArrowDown' || event.code === 'ArrowUp') {
+        event.preventDefault();
+    }
+
+    if ((event.code === 'Space' || event.code === 'ArrowUp') && !isGameOver) {
         jump();
     }
 
@@ -134,6 +141,12 @@ function createObstacle() {
     const obstacle = document.createElement('div');
     obstacle.classList.add('obstacle');
     obstacle.style.left = '100%'; // Positionnement initial à droite
+
+    // Applique le skin sélectionné, s'il y en a un
+    if (currentObstacleSkin) {
+        obstacle.style.backgroundImage = `url(${currentObstacleSkin.image})`;
+    }
+
     document.getElementById('game-container').appendChild(obstacle);
     moveObstacle(obstacle);
 }
@@ -141,12 +154,18 @@ function createObstacle() {
 function createFlyingObstacle() {
     const flyingObstacle = document.createElement('div');
     flyingObstacle.classList.add('obstacle-flying');
+    flyingObstacle.id = 'flying-obstacle-' + Date.now(); // ID unique
 
-    // Ajoute un ID unique à l'obstacle
-    flyingObstacle.id = 'flying-obstacle-' + Date.now(); // Exemple : 'flying-obstacle-1633531530000'
+    // Applique le skin sélectionné, s'il y en a un
+    if (currentFlyingObstacleSkin) {
+        flyingObstacle.style.backgroundImage = `url(${currentFlyingObstacleSkin.image})`;
+        console.log("Skin appliqué à l'obstacle volant : ", currentFlyingObstacleSkin.name);
+    } else {
+        console.log("Pas de skin sélectionné pour l'obstacle volant.");
+    }
 
     document.getElementById('game-container').appendChild(flyingObstacle);
-    moveObstacle(flyingObstacle); 
+    moveObstacle(flyingObstacle);
 }
 
 function moveObstacle(obstacle) {
@@ -319,81 +338,142 @@ function increaseDifficulty() {
 
 // Démarrer le jeu
 startGame();
-
-const skins = [
-    { id: 1, name: 'Skin Commun 1', rarity: 'common', image: 'images/skin_common_1.png' },
-    { id: 2, name: 'Skin Commun 2', rarity: 'common', image: 'images/skin_common_2.png' },
-    { id: 3, name: 'Skin Rare 1', rarity: 'rare', image: 'images/skin_rare_1.png' },
-    { id: 4, name: 'Skin Épique 1', rarity: 'epic', image: 'images/skin_epic_1.png' }
+const defaultSkins = [
+    { id: 1, name: 'Oiseau', rarity: 'common', image: 'images/oiseau-removebg-preview.png', category: 'obstacle2', price: 0 },
+    { id: 2, name: 'Cactus', rarity: 'common', image: 'images/cactusdebase.png', category: 'obstacle', price: 0 },
+    { id: 3, name: 'Soleil', rarity: 'common', image: 'images/gifsoleil.gif', category: 'decor', price: 0 },
+    { id: 4, name: 'Cactus Animé', rarity: 'rare', image: 'images/gifcactus.gif', category: 'decor2', price: 0 },
+    { id: 5, name: 'Dinosaure de base', rarity: 'common', image: 'images/image0-removebg-preview.png', category: 'dino', price: 0 }
 ];
 
-let userSkins = [];
+const step2Skins = [
+    { id: 6, name: 'Batman', rarity: 'rare', image: 'images/batman-removebg-preview.png', category: 'dino', price: 400 },
+    { id: 7, name: 'Skin Épique 1', rarity: 'epic', image: 'images/skin_epic_1.png', price: 500 },
+    { id: 8, name: 'Père Noël', rarity: 'rare', image: 'images/perernoel-removebg-preview.png', category: 'dino', price: 350 },
+    { id: 9, name: 'Godzilla', rarity: 'common', image: 'images/godzilla-removebg-preview.png', category: 'dino', price: 250 },
+    { id: 10, name: 'Naruto', rarity: 'rare', image: 'images/narutoi-removebg-preview.png', category: 'dino', price: 300 },
+    { id: 11, name: 'Avion 1', rarity: 'common', image: 'images/avion1-removebg-preview.png', category: 'obstacle2', price: 3 },
+    { id: 12, name: 'Avion 2', rarity: 'rare', image: 'images/avion2-removebg-preview.png', category: 'obstacle2', price: 3 },
+    { id: 13, name: 'Cat', rarity: 'rare', image: 'images/cat1.webp', category: 'dino', price: 3 },
+    { id: 14, name: 'Coq', rarity: 'rare', image: 'images/coq-removebg-preview.png', category: 'dino', price: 3 },
+    { id: 15, name: 'Drone', rarity: 'rare', image: 'images/drone-removebg-preview.png', category: 'obstacle2', price: 3 },
+    { id: 16, name: 'Avion de ligne', rarity: 'rare', image: 'images/avion2-removebg-preview.png', category: 'obstacle2', price: 3 },
+    { id: 17, name: 'Avion en papier', rarity: 'common', image: 'images/avion1-removebg-preview.png', category: 'obstacle2', price: 3 },
+];
 
+let userSkins = JSON.parse(localStorage.getItem('userSkins')) || []; // Récupérer les skins depuis localStorage
+let step2Unlocked = JSON.parse(localStorage.getItem('step2Unlocked')) || false; // Vérifier si l'étape 2 est déverrouillée
 
-// Ajouter un skin à l'inventaire de l'utilisateur
-function addSkinToInventory(skin) {
-    userSkins.push(skin);
-    displaySkins();
+// Vérifier si l'inventaire est vide et y ajouter les skins par défaut
+if (userSkins.length === 0) {
+    userSkins = defaultSkins;
+    localStorage.setItem('userSkins', JSON.stringify(userSkins)); // Sauvegarder dans localStorage
 }
 
-// Simuler la roulette aléatoire
-function spinRoulette() {
-    const rouletteItems = document.getElementById('roulette-items');
-    const totalSkins = [...skins, ...skins, ...skins]; // Ajout pour plus de skins dans la roulette
-
-    rouletteItems.innerHTML = ''; // Reset la roulette
-    totalSkins.forEach(skin => {
-        const item = document.createElement('div');
-        item.classList.add('skin-item', `skin-${skin.rarity}`);
-        item.style.backgroundImage = `url(${skin.image})`;
-        rouletteItems.appendChild(item);
-    });
-
-    // Démarrer la roulette
-    const randomStop = Math.floor(Math.random() * totalSkins.length) * -100;
-    rouletteItems.style.transform = `translateX(${randomStop}px)`;
-
-    // Sélectionner le skin après 2 secondes
-    setTimeout(() => {
-        const selectedSkin = totalSkins[Math.abs(randomStop / 100)];
-        addSkinToInventory(selectedSkin);
-    }, 2000);
+// Vérifier si l'étape 2 est déjà déverrouillée et masquer le bouton si c'est le cas
+if (step2Unlocked) {
+    document.getElementById('unlock-button').style.display = 'none'; // Masquer le bouton si déjà déverrouillé
 }
 
-// Afficher les skins de l'utilisateur
-function displaySkins(rarity = 'all') {
-    const skinGallery = document.getElementById('skin-gallery');
-    skinGallery.innerHTML = '';
-
-    const filteredSkins = rarity === 'all' ? userSkins : userSkins.filter(skin => skin.rarity === rarity);
-    filteredSkins.forEach(skin => {
-        const skinElement = document.createElement('div');
-        skinElement.classList.add('skin-item', `skin-${skin.rarity}`);
-        skinElement.style.backgroundImage = `url(${skin.image})`;
-        skinGallery.appendChild(skinElement);
-
-        // Choisir un skin pour le jeu
-        skinElement.addEventListener('click', () => {
-            document.getElementById('dino').style.backgroundImage = `url(${skin.image})`;
-        });
-    });
+// Afficher le nombre de coins
+function updateCoins() {
+    document.getElementById('coin-display').textContent = coins;
 }
 
-// Filtrer les skins
-document.querySelectorAll('.filter-button').forEach(button => {
-    button.addEventListener('click', (event) => {
-        const rarity = event.target.getAttribute('data-rarity');
-        displaySkins(rarity);
-    });
-});
-
-// Lancer la roulette lors du clic sur le bouton "Obtenir un skin"
-document.getElementById('drop-button').addEventListener('click', () => {
-    if (coins >= 100) { // Nécessite 100 coins pour tenter un skin
-        coins -= 100;
+function unlockStep2() {
+    if (coins >= 5) { // Exiger 5 pièces pour débloquer
+        coins -= 5;
+        step2Unlocked = true;
         updateCoins();
-        spinRoulette();
+        displaySkins(); // Mettre à jour l'affichage après déblocage
+        document.getElementById('unlock-button').style.display = 'none'; // Cacher le bouton
     } else {
-        alert('Pas assez de coins!');
+        alert('Pas assez de pièces pour débloquer l\'étape 2 !');
     }
-});
+    localStorage.setItem('step2Unlocked', true); // Sauvegarder l'état du déblocage de l'étape 2
+}
+
+function displaySkins() {
+    const skinGallery = document.getElementById('skin-gallery');
+    skinGallery.innerHTML = ''; // Réinitialiser la galerie
+
+    const skinsToDisplay = [...defaultSkins, ...(step2Unlocked ? step2Skins : [])];
+
+    skinsToDisplay.forEach(skin => {
+        const skinElement = document.createElement('div');
+        skinElement.classList.add('skin-item', userSkins.some(ownedSkin => ownedSkin.id === skin.id) ? 'owned' : 'not-owned');
+        skinElement.style.backgroundImage = `url(${skin.image})`;
+        skinElement.style.backgroundSize = 'cover'; // Pour couvrir l'élément
+
+        const skinPrice = document.createElement('div');
+        skinPrice.classList.add('skin-price');
+        skinPrice.textContent = skin.price > 0 ? `${skin.price} pièces` : 'Gratuit';
+
+        skinElement.appendChild(skinPrice);
+
+        // Événement de clic pour acheter et appliquer le skin
+        skinElement.addEventListener('click', () => {
+            const skinAlreadyOwned = userSkins.some(ownedSkin => ownedSkin.id === skin.id);
+            if (!skinAlreadyOwned) {
+                // Acheter le skin seulement s'il n'est pas possédé
+                if (coins >= skin.price) {
+                    userSkins.push({...skin}); // Ajouter le skin à l'inventaire (copie du skin)
+                    coins -= skin.price; // Déduire le coût
+                    localStorage.setItem('userSkins', JSON.stringify(userSkins)); // Sauvegarder dans localStorage
+                    updateCoins();
+                    applySkin(skin); // Appliquer le skin immédiatement après l'achat
+            
+                    // Mettre à jour l'affichage des skins (sans duplication)
+                    displaySkins();
+                } else {
+                    alert('Pas assez de pièces pour acheter ce skin !');
+                }
+            } else {
+                applySkin(skin); // Appliquer le skin si déjà possédé
+            }
+            
+        });
+
+        skinGallery.appendChild(skinElement);
+    });
+}
+
+// Gestion du bouton de déblocage
+const unlockButton = document.getElementById('unlock-button');
+unlockButton.addEventListener('click', unlockStep2);
+
+function applySkin(skin) {
+    if (!skin.category) {
+        console.error("Skin sans catégorie détecté : ", skin.name);
+        return;
+    }
+    switch (skin.category) {
+        case 'dino':
+            document.getElementById('dino').style.backgroundImage = `url(${skin.image})`;
+            break;
+        case 'obstacle':
+            // Applique le skin aux obstacles normaux
+            document.querySelectorAll('.obstacle').forEach(obstacle => {
+                obstacle.style.backgroundImage = `url(${skin.image})`;
+            });
+            break;
+        case 'obstacle2':
+            // Applique le skin aux obstacles volants
+            document.querySelectorAll('.obstacle-flying').forEach(obstacle => {
+                obstacle.style.backgroundImage = `url(${skin.image})`;
+            });
+            break;
+        case 'decor':
+            document.querySelector('.sun-decoration').style.backgroundImage = `url(${skin.image})`;
+            break;
+        case 'decor2':
+            document.querySelector('.cactus-decoration').style.backgroundImage = `url(${skin.image})`;
+            break;
+        default:
+            console.error("Catégorie inconnue ou non spécifiée pour le skin: ", skin.name);
+    }
+}
+
+// Initialiser l'affichage
+updateCoins();
+displaySkins();

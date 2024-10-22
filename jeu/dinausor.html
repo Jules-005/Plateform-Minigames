@@ -26,9 +26,17 @@
     </div>
 
     <div id="game-container">
-        <div class="decoration cactus-decoration"></div>
-        <div class="decoration sun-decoration"></div>
-        <div id="dino"></div>
+        <div id="game-background">
+            <div id="dino" class="dino"></div>
+        
+            <!-- Obstacles générés dynamiquement -->
+            <div id="obstacles-container"></div>
+            
+            <!-- Décors -->
+            <div class="decoration cactus-decoration"></div>
+            <div class="decoration sun-decoration"></div>
+        </div>
+        
         <div id="score-container">
             <div id="current-score">Score: 0</div>
             <div id="best-score">Meilleur Score: 0</div>
@@ -44,28 +52,28 @@
             </div>
         </div>
     </div>
-    <!-- Ajouter cette section dans ton HTML en dessous du jeu -->
-<div id="coin-section">
-    <div class="coingif"><img src="images/coin gif.gif" width="62px" height="62px"></div>
-    <div id="coin-display">0 </div>
     
-    <button id="drop-button">Obtenir un skin</button>
-    <div id="roulette-section" class="hidden">
-        <div id="roulette-line"></div>
-        <div id="roulette-items"></div>
+    <!-- Section pour les pièces -->
+    <div id="coin-section">
+        <div class="coingif"><img src="images/coin gif.gif" width="62px" height="62px"></div>
+        <div id="coin-display">0</div>
     </div>
-</div>
-<!-- Ajouter cette section pour l'affichage de tous les skins sous la roulette -->
-<div id="skins-section">
-    <h3>Mes Skins</h3>
-    <div id="skin-filter">
-        <button class="filter-button" data-rarity="all">Tous</button>
-        <button class="filter-button" data-rarity="common">Commun</button>
-        <button class="filter-button" data-rarity="rare">Rare</button>
-        <button class="filter-button" data-rarity="epic">Épique</button>
-    </div>
-    <div id="skin-gallery"></div>
-</div>
+    
+    <br><br>
+    
+    <!-- Section pour l'affichage des skins -->
+    <div id="skins-section">
+        <h3>Mes Skins</h3>
+        <div id="skin-filter">
+            <button class="filter-button" data-rarity="all">Tous</button>
+            <button class="filter-button" data-rarity="common">Commun</button>
+            <button class="filter-button" data-rarity="rare">Rare</button>
+            <button class="filter-button" data-rarity="epic">Épique</button>
+        </div>
+        <div id="coin-display"></div>
+        <div id="skin-gallery"></div> 
+        <button id="unlock-button">Débloquer d'autres skins (5 pièces)</button>
+        
 
     <script src="dinausor.js"></script>
 </body>

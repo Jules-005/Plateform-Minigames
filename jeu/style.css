@@ -127,31 +127,26 @@ footer {
     color: #fff;
 }
 
-#game-container {
-    position: relative;
-    width: 100%;
-    height: 200px;
-    border: 2px solid #333;
-    overflow: hidden;
-}
+
 
 #dino {
     position: absolute;
     bottom: 0;
-    left: 50px; /* Ajuste selon ton besoin */
-    width: 80px; /* Ajuster la taille selon tes besoins */
+    left: 50px;
+    width: 80px;
     height: 80px;
-    background-image: url('images/image0-removebg-preview.png'); /* Remplacer par ton image propre */
+    background-image: url('images/image0-removebg-preview.png');
     background-size: contain;
     background-repeat: no-repeat;
-    background-color: transparent; /* Assurez-vous que le background est transparent */
-    margin: 0; /* Assurez-vous qu'il n'y a pas de margin qui perturbe */
-    padding: 0; /* Assurez-vous qu'il n'y a pas de padding */
-    border: none; /* Aucune bordure visible ou invisible */
-    transform: scaleY(1) rotate(0deg); /* Taille normale et sans rotation */
-    transform-origin: bottom; /* Point d'ancrage en bas */
-    transition: transform 0.2s ease-in-out; /* Transition douce pour l'animation */
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+    border: none;
+    transform: scaleY(1) rotate(0deg);
+    transform-origin: bottom;
+    transition: transform 0.2s ease-in-out;
 }
+
 
 
 #dino-collision {
@@ -196,17 +191,29 @@ footer {
     width: 100px;
     height: 100px;
     background-image: url('images/gifsoleil.gif'); /* Exemple de soleil animé */
+    animation: moveSun 40s linear infinite; /* Animation continue pour simuler le mouvement du soleil */
 }
 
+@keyframes moveSun {
+    0% {
+        right: 0%; /* Position initiale à droite */
+    }
+    50% {
+        right: 100%; /* Déplace vers la gauche (100% correspond au bord gauche) */
+    }
+    100% {
+        right: 0%; /* Retourne à droite */
+    }
+}
 .obstacle {
     position: absolute;
     margin-top: 147px;
     width: 60px; /* Taille de l'obstacle, ajuste en fonction de ton image */
     height: 200px;
-    background-image: url('images/—Pngtree—cactus_5990771 2 (1).png'); /* Assure-toi que le chemin est correct */
+    background-image: url('images/cactusdebase.png'); /* Assure-toi que le chemin est correct */
     background-size: contain; /* Ajuste l'image à la taille de l'obstacle */
     background-repeat: no-repeat; /* Empêche l'image de se répéter */
-    background-color: transparent; /* Supprime la couleur de fond marron */
+    
 }
 
 #current-score {
@@ -260,8 +267,7 @@ footer {
 
 .game-over {
     display: none; /* Masqué par défaut */
-    position: fixed;
-    top: 141px;
+    position: absolute;
     left: 0;
     width: 100%;
     height: 202px;
@@ -325,87 +331,97 @@ footer {
     font-size: 24px;
     bottom: 0;
 }
-#drop-button {
-    background-color: #ff69b4;
-    color: white;
-    padding: 10px 20px;
-    font-size: 18px;
-    border: none;
-    margin-top: 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#drop-button:hover {
-    background-color: #ff1493;
-}
-
-#roulette-section {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-#roulette-line {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background-color: red;
-    left: 50%;
-}
-
-#roulette-items {
-    display: flex;
-    overflow: hidden;
-    width: 500px;
-    height: 100px;
-    border: 2px solid #333;
-    margin-top: 20px;
-    transition: transform 2s cubic-bezier(0.33, 1, 0.68, 1);
-}
-
-#skins-section {
-    margin-top: 40px;
-    text-align: center;
-}
-
 #skin-gallery {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
     justify-content: center;
+    gap: 20px; /* Espace entre les skins */
 }
 
 .skin-item {
-    width: 80px;
-    height: 80px;
-    border: 2px solid transparent;
-    cursor: pointer;
+    width: 150px; /* Taille des skins */
+    height: 150px; /* Taille des skins */
+    border: 2px solid transparent; /* Bordure par défaut */
+    position: relative;
+    transition: border 0.3s, opacity 0.3s, transform 0.3s;
     background-size: cover;
-    background-position: center;
+}
+
+
+.skin-item:not(.owned) {
+    opacity: 0.5; /* Transparence pour les skins non possédés */
+}
+
+.skin-price {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px; /* Taille de la police pour le prix */
+}
+
+.skin-item:hover {
+    cursor: pointer;
+    border-color: #fffc42; /* Bordure rose lors du survol */
+    transform: scale(1.1); /* Agrandir légèrement l'élément */
+}
+
+.skin-item:hover:not(.owned) {
+    opacity: 0.7; /* Réduction de la transparence au survol pour les skins non possédés */
+}
+.skin-item.owned .skin-common {
+    border: 2px solid gray;
 }
 
 .skin-common {
-    border-color: gray;
+    border: 2px solid gray;
+}
+.skin-item.owned .skin-rare {
+    border: 2px solid blue;
 }
 
 .skin-rare {
-    border-color: blue;
+    border: 2px solid blue;
 }
-
+.skin-item.owned .skin-epic {
+    border: 2px solid purple;
+}
 .skin-epic {
-    border-color: purple;
+    border: 2px solid purple;
 }
 
-.filter-button {
-    padding: 5px 10px;
-    margin: 5px;
+#skin-filter {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Espace entre les boutons */
+    margin-bottom: 20px; /* Espace entre les boutons de filtre et la galerie */
+}
+
+.filter-button, #unlock-button {
+    padding: 10px 20px;
     cursor: pointer;
     background-color: #ff69b4;
     color: white;
     border: none;
     border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
+
+.filter-button:hover, #unlock-button:hover {
+    background-color: #ff85c1; /* Changement de couleur au survol */
+}
+
+/* Centrer le bouton de déverrouillage sous la galerie de skins */
+#unlock-button {
+    display: block;
+    margin: 20px auto 0 auto; /* Centrer et ajouter un espace en haut */
+}
+
+#skins-section {
+    text-align: center; /* Centrer le texte dans la section skins */
+}
+    
