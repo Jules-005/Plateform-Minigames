@@ -345,6 +345,7 @@ footer {
     position: relative;
     transition: border 0.3s, opacity 0.3s, transform 0.3s;
     background-size: cover;
+    border: 2px solid blue;
 }
 
 
@@ -373,25 +374,17 @@ footer {
 .skin-item:hover:not(.owned) {
     opacity: 0.7; /* Réduction de la transparence au survol pour les skins non possédés */
 }
-.skin-item.owned .skin-common {
-    border: 2px solid gray;
+.styled-header {
+    padding: 10px 20px;              /* Espacement interne */
+    background-color: #ff69b4;      /* Couleur de fond */
+    color: white;                    /* Couleur du texte */
+    border-radius: 5px;              /* Coins arrondis */
+    text-align: center;              /* Centrer le texte */
+    transition: background-color 0.3s ease; /* Transition pour changement de couleur */
 }
 
-.skin-common {
-    border: 2px solid gray;
-}
-.skin-item.owned .skin-rare {
-    border: 2px solid blue;
-}
-
-.skin-rare {
-    border: 2px solid blue;
-}
-.skin-item.owned .skin-epic {
-    border: 2px solid purple;
-}
-.skin-epic {
-    border: 2px solid purple;
+.styled-header:hover {
+    background-color: #ff85c1; /* Changement de couleur au survol */
 }
 
 #skin-filter {
@@ -401,19 +394,6 @@ footer {
     margin-bottom: 20px; /* Espace entre les boutons de filtre et la galerie */
 }
 
-.filter-button, #unlock-button {
-    padding: 10px 20px;
-    cursor: pointer;
-    background-color: #ff69b4;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.filter-button:hover, #unlock-button:hover {
-    background-color: #ff85c1; /* Changement de couleur au survol */
-}
 
 /* Centrer le bouton de déverrouillage sous la galerie de skins */
 #unlock-button {
@@ -424,4 +404,71 @@ footer {
 #skins-section {
     text-align: center; /* Centrer le texte dans la section skins */
 }
-    
+/* Style pour la Tour Eiffel */
+.obstacle.eiffel {
+    background-image: url('images/eiffel.webp');
+    background-size: contain;
+    width: 30px;
+    height: 70px;
+    background-repeat: no-repeat;
+    margin-top: 140px;
+}
+
+/* Style pour l'Empire State Building */
+.obstacle.empire {
+    background-image: url('images/tour_new_york-removebg-preview.png');
+    background-size: contain;
+    width: 110px;
+    height: 520px;
+    background-repeat: no-repeat;
+    margin-top: 170px;
+}
+
+/* Style pour la Statue de la Liberté */
+.obstacle.liberty {
+    background-image: url('images/liberte-removebg-preview.png');
+    background-size: contain;
+    width: 50px;
+    height: 70px;
+    background-repeat: no-repeat;
+    margin-top: 138px;
+}
+#color-picker {
+    margin-top: 10px;
+    padding: 5px;
+    border: 2px solid #ff69b4; /* Bordure rose vif */
+    border-radius: 5px;
+    background-color: #ff69b4;
+}
+
+#color-input {
+    margin-right: 10px;
+}
+.filter-button, #unlock-button, #unlock-color-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.filter-button:hover, #unlock-button:hover, #unlock-color-button:hover {
+    background-color: #ff85c1; /* Changement de couleur au survol */
+}
+#apply-color {
+    padding: 10px 20px; /* Espacement intérieur */
+    cursor: pointer; /* Changer le curseur en pointeur */
+    background-color: white; /* Fond blanc */
+    color: black; /* Texte noir */
+    border: 2px solid black; /* Bordure noire */
+    border-radius: 5px; /* Coins arrondis */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transition douce pour le changement de couleur */
+}
+
+#apply-color:hover {
+    background-color: black; /* Fond noir au survol */
+    color: white; /* Texte blanc au survol */
+}

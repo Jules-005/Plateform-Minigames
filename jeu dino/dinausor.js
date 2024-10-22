@@ -14,8 +14,13 @@ let gameStarted = false; // Indique si le jeu a commencé
 let timeElapsed = 0; // Temps écoulé en secondes
 let scoreInterval; // Intervalle pour mettre à jour le score
 let scoreUpdated = false; // État pour savoir si le score a déjà été mis à jour à la mort
-let currentObstacleSkin = null; // Pour les obstacles normaux
-let currentFlyingObstacleSkin = null; // Pour les obstacles volants
+
+let currentDinoSkin = null;
+let currentObstacleSkin = null;
+let currentFlyingObstacleSkin = null;
+let currentDecorSkin = null;
+let currentCactusDecorSkin = null;
+
 
 document.addEventListener('keydown', function(event) {
     const dino = document.getElementById('dino');
@@ -68,6 +73,15 @@ function checkCollision() {
             left: flyingObstacleRect.left, // Position à gauche
             right: flyingObstacleRect.right // Position à droite
         };
+            // Récupérer le skin appliqué à l'obstacle pour utiliser ses ajustements
+    let collisionAdjustments = { top: 0, bottom: 0, left: 0, right: 0 };  // Par défaut, pas d'ajustement
+    if (obstacle.classList.contains('eiffel')) {
+        collisionAdjustments = skins.find(skin => skin.name === 'Tour Eiffel').collisionAdjustments;
+    } else if (obstacle.classList.contains('empire')) {
+        collisionAdjustments = skins.find(skin => skin.name === 'Empire State Building').collisionAdjustments;
+    } else if (obstacle.classList.contains('liberty')) {
+        collisionAdjustments = skins.find(skin => skin.name === 'Statut de la liberté').collisionAdjustments;
+    }
 
         // Ajustement des dimensions du dinosaure
         const adjustedDinoRect = {
@@ -142,9 +156,17 @@ function createObstacle() {
     obstacle.classList.add('obstacle');
     obstacle.style.left = '100%'; // Positionnement initial à droite
 
-    // Applique le skin sélectionné, s'il y en a un
     if (currentObstacleSkin) {
         obstacle.style.backgroundImage = `url(${currentObstacleSkin.image})`;
+
+        // Ajouter une classe spécifique selon le skin
+        if (currentObstacleSkin.name === 'Tour Eiffel') {
+            obstacle.classList.add('eiffel');
+        } else if (currentObstacleSkin.name === 'Empire State Building') {
+            obstacle.classList.add('empire');
+        } else if (currentObstacleSkin.name === 'Statut de la liberté') {
+            obstacle.classList.add('liberty');
+        }
     }
 
     document.getElementById('game-container').appendChild(obstacle);
@@ -160,9 +182,7 @@ function createFlyingObstacle() {
     if (currentFlyingObstacleSkin) {
         flyingObstacle.style.backgroundImage = `url(${currentFlyingObstacleSkin.image})`;
         console.log("Skin appliqué à l'obstacle volant : ", currentFlyingObstacleSkin.name);
-    } else {
-        console.log("Pas de skin sélectionné pour l'obstacle volant.");
-    }
+    } 
 
     document.getElementById('game-container').appendChild(flyingObstacle);
     moveObstacle(flyingObstacle);
@@ -347,18 +367,30 @@ const defaultSkins = [
 ];
 
 const step2Skins = [
-    { id: 6, name: 'Batman', rarity: 'rare', image: 'images/batman-removebg-preview.png', category: 'dino', price: 400 },
-    { id: 7, name: 'Skin Épique 1', rarity: 'epic', image: 'images/skin_epic_1.png', price: 500 },
-    { id: 8, name: 'Père Noël', rarity: 'rare', image: 'images/perernoel-removebg-preview.png', category: 'dino', price: 350 },
-    { id: 9, name: 'Godzilla', rarity: 'common', image: 'images/godzilla-removebg-preview.png', category: 'dino', price: 250 },
-    { id: 10, name: 'Naruto', rarity: 'rare', image: 'images/narutoi-removebg-preview.png', category: 'dino', price: 300 },
-    { id: 11, name: 'Avion 1', rarity: 'common', image: 'images/avion1-removebg-preview.png', category: 'obstacle2', price: 3 },
-    { id: 12, name: 'Avion 2', rarity: 'rare', image: 'images/avion2-removebg-preview.png', category: 'obstacle2', price: 3 },
+    { id: 6, name: 'Batman', rarity: 'rare', image: 'images/batman-removebg-preview.png', category: 'dino', price: 3 },
+    { id: 7, name: 'Statut de la liberté', rarity: 'epic', image: 'images/liberte-removebg-preview.png', category: 'obstacle', price: 3 },
+    { id: 8, name: 'Père Noël', rarity: 'rare', image: 'images/perernoel-removebg-preview.png', category: 'dino', price: 3 },
+    { id: 9, name: 'Godzilla', rarity: 'common', image: 'images/godzilla-removebg-preview.png', category: 'dino', price: 3 },
+    { id: 10, name: 'Naruto', rarity: 'rare', image: 'images/narutoi-removebg-preview.png', category: 'dino', price: 3 },
+    { id: 11, name: 'Dragon', rarity: 'epic', image: 'images/dragonobstacle-ezgif.com-rotate.gif', category: 'obstacle2', price: 3 },
+    { id: 10, name: 'Coureur', rarity: 'rare', image: 'images/personnecourir-ezgif.com-rotate.gif', category: 'dino', price: 3 },
     { id: 13, name: 'Cat', rarity: 'rare', image: 'images/cat1.webp', category: 'dino', price: 3 },
     { id: 14, name: 'Coq', rarity: 'rare', image: 'images/coq-removebg-preview.png', category: 'dino', price: 3 },
     { id: 15, name: 'Drone', rarity: 'rare', image: 'images/drone-removebg-preview.png', category: 'obstacle2', price: 3 },
     { id: 16, name: 'Avion de ligne', rarity: 'rare', image: 'images/avion2-removebg-preview.png', category: 'obstacle2', price: 3 },
     { id: 17, name: 'Avion en papier', rarity: 'common', image: 'images/avion1-removebg-preview.png', category: 'obstacle2', price: 3 },
+    { id: 18, name: 'Tour Eiffel', rarity: 'rare', image: 'images/eiffel.webp', category: 'obstacle', price: 3 },
+    { id: 19, name: 'Empire State Building ', rarity: 'rare', image: 'images/tour_new_york-removebg-preview.png', category: 'obstacle', price: 3 },
+    { id: 20, name: 'Quart de lune', rarity: 'rare', image: 'images/tierlune.gif', category: 'decor', price: 3 },
+    { id: 28, name: 'Aigle', rarity: 'commun', image: 'images/aigle-removebg-preview.png', category: 'obstacle2', price: 3 },
+    { id: 21, name: 'Lune', rarity: 'epic', image: 'images/lunegif.gif', category: 'decor', price: 3 },
+    { id: 22, name: 'Pleine lune', rarity: 'common', image: 'images/lune-removebg-preview.png', category: 'decor', price: 3 },
+    { id: 23, name: 'Emoji', rarity: 'rare', image: 'images/emoji.gif', category: 'decor', price: 3 },
+    { id: 24, name: 'Dauphin', rarity: 'epic', image: 'images/dauphindino.gif', category: 'dino', price: 3 },
+    { id: 25, name: 'Banane', rarity: 'epic', image: 'images/bananedino-ezgif.com-rotate.gif', category: 'dino', price: 3 },
+    { id: 26, name: 'Animation chat', rarity: 'common', image: 'images/chatgif.gif', category: 'decor2', price: 3 },
+    { id: 27, name: 'Dragon', rarity: 'epic', image: 'images/dragonobstacle-ezgif.com-rotate.gif', category: 'obstacle2', price: 3 },
+    { id: 28, name: 'Raie', rarity: 'epic', image: 'images/obstacleraie.gif', category: 'obstacle2', price: 3 },
 ];
 
 let userSkins = JSON.parse(localStorage.getItem('userSkins')) || []; // Récupérer les skins depuis localStorage
@@ -431,7 +463,46 @@ function displaySkins() {
             } else {
                 applySkin(skin); // Appliquer le skin si déjà possédé
             }
-            
+            switch(skin.category) {
+                case 'dino':
+                    currentDinoSkin = skin;
+                    document.getElementById('dino').style.backgroundImage = `url(${skin.image})`; // Appliquer le skin directement au dino
+                    break;
+                    case 'obstacle':
+    // Mettre à jour le skin actuel des futurs obstacles
+    currentObstacleSkin = skin;
+    
+    // Modifier les obstacles déjà présents à l'écran
+    document.querySelectorAll('.obstacle').forEach(obstacle => {
+        // Appliquer l'image du skin sélectionné
+        obstacle.style.backgroundImage = `url(${skin.image})`;
+
+        // Enlever toutes les classes spécifiques précédentes
+        obstacle.classList.remove('eiffel', 'empire', 'liberty');
+
+        // Ajouter une classe spécifique en fonction du skin
+        if (skin.name === 'Tour Eiffel') {
+            obstacle.classList.add('eiffel');
+        } else if (skin.name === 'Empire State Building') {
+            obstacle.classList.add('empire');
+        } else if (skin.name === 'Statut de la liberté') {
+            obstacle.classList.add('liberty');
+        }
+    });
+    break;
+
+                case 'obstacle2':
+                    currentFlyingObstacleSkin = skin;
+                    break;
+                case 'decor':
+                    currentDecorSkin = skin;
+                    break;
+                case 'decor2':
+                    currentCactusDecorSkin = skin;
+                    break;
+                default:
+                    console.log('Catégorie inconnue:', skin.category);
+            }
         });
 
         skinGallery.appendChild(skinElement);
@@ -474,6 +545,73 @@ function applySkin(skin) {
     }
 }
 
-// Initialiser l'affichage
+const skins = [
+    {
+        name: 'Tour Eiffel',
+        image: 'eiffel.jpg',
+        collisionAdjustments: { top: 15, bottom: -10, left: 10, right: -10 }  // Ajustements spécifiques pour les collisions
+    },
+    {
+        name: 'Empire State Building',
+        image: 'empire.jpg',
+        collisionAdjustments: { top: 20, bottom: -15, left: 15, right: -20 }
+    },
+    {
+        name: 'Statut de la liberté',
+        image: 'liberty.jpg',
+        collisionAdjustments: { top: -7000, bottom: -70, left: -150, right: -150 }
+    }
+];
+let colorMenuUnlocked = localStorage.getItem('colorMenuUnlocked') === 'true'; // Récupérer l'état du déblocage de menu de couleur
+
+// Vérifie si une couleur a été sauvegardée et l'applique (si applicable)
+// const savedColor = localStorage.getItem('gameBackgroundColor');
+// if (savedColor) {
+//     document.getElementById('game-container').style.backgroundColor = savedColor;
+// }
+
+// Fonction pour mettre à jour l'affichage des pièces
+function updateCoins() {
+    document.getElementById('coin-display').innerText = coins;
+}
+
+// Fonction pour déverrouiller le menu de couleurs
+function unlockColorMenu() {
+    if (coins >= 5) { // Vérifie si le joueur a au moins 5 pièces
+        coins -= 5; // Retire 5 pièces
+        updateCoins(); // Met à jour l'affichage des pièces
+
+        // Affiche le menu de couleurs
+        document.getElementById('color-picker').style.display = 'block';
+
+        // Cache le bouton de déblocage
+        document.getElementById('unlock-color-button').style.display = 'none'; 
+
+        // Sauvegarde l'état de déblocage du menu couleur
+        localStorage.setItem('colorMenuUnlocked', true); 
+    } else {
+        alert('Pas assez de pièces pour débloquer le menu couleur !');
+    }
+}
+
+// Ajoute l'écouteur d'événements pour le bouton de déblocage du menu couleur
+document.getElementById('unlock-color-button').addEventListener('click', unlockColorMenu);
+
+// Écouteur d'événements pour appliquer la couleur
+document.getElementById('apply-color').addEventListener('click', function() {
+    const selectedColor = document.getElementById('color-input').value;
+    document.getElementById('game-container').style.backgroundColor = selectedColor; // Appliquer la couleur au conteneur du jeu
+
+    // Sauvegarder la couleur dans le local storage
+    // localStorage.setItem('gameBackgroundColor', selectedColor); // Si tu veux garder ça
+});
+
+// Vérifie si le menu de couleur est déverrouillé au chargement de la page
+if (colorMenuUnlocked) {
+    document.getElementById('color-picker').style.display = 'block'; // Affiche le menu de couleur
+    document.getElementById('unlock-color-button').style.display = 'none'; // Cache le bouton de déblocage
+} else {
+    document.getElementById('color-picker').style.display = 'none'; // Cache le menu de couleur par défaut
+}
 updateCoins();
 displaySkins();

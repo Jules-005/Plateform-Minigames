@@ -63,18 +63,18 @@
     
     <!-- Section pour l'affichage des skins -->
     <div id="skins-section">
-        <h3>Mes Skins</h3>
-        <div id="skin-filter">
-            <button class="filter-button" data-rarity="all">Tous</button>
-            <button class="filter-button" data-rarity="common">Commun</button>
-            <button class="filter-button" data-rarity="rare">Rare</button>
-            <button class="filter-button" data-rarity="epic">Épique</button>
-        </div>
+        <h3 class="styled-header">Mes Skins</h3>
         <div id="coin-display"></div>
-        <div id="skin-gallery"></div> 
-        <button id="unlock-button">Débloquer d'autres skins (5 pièces)</button>
-        
-
+        <div id="skin-gallery">
+        <div id="skin-list"></div>
+        </div> 
+        <button id="unlock-button" class="filter-button">Débloquer d'autres skins (5 pièces)</button>
+    <button id="unlock-color-button" class="filter-button">Débloquer un menu couleur (5 pièces)</button>
+        <div id="color-picker" style="display: none;" >
+            <h3>Choisissez une couleur :
+            <input type="color" id="color-input">
+            <button id="apply-color">Appliquer</button></h3>
+        </div>
     <script src="dinausor.js"></script>
 </body>
 </html>
