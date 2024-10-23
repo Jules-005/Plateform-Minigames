@@ -4,6 +4,7 @@
 	box-sizing: border-box;
 	font-family: Arial, Helvetica, sans-serif;
 }
+
 .background {
 	height: 100vh;
 	width: 100vw;
@@ -12,7 +13,9 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+	position: relative; /* Nécessaire pour que le header soit positionné par rapport au body */
 }
+
 .bird {
 	height: 100px;
 	width: 130px;
@@ -21,15 +24,17 @@
 	left: 30vw;
 	z-index: 100;
 }
+
 .pipe_sprite {
 	position: fixed;
 	top: 40vh;
 	left: 100vw;
 	height: 70vh;
 	width: 6vw;
-	background:radial-gradient(lightgreen 50%, green);
+	background: radial-gradient(lightgreen 50%, green);
 	border: 5px solid black;
 }
+
 .message {
 	position: absolute;
 	z-index: 10;
@@ -40,12 +45,14 @@
 	transform: translate(-50%, -50%);
 	text-align: center;
 }
-.messageStyle{
+
+.messageStyle {
 	background: white;
 	padding: 30px;
 	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 	border-radius: 5%;
 }
+
 .score {
 	position: fixed;
 	z-index: 10;
@@ -60,24 +67,56 @@
 	margin: 10px;
 	font-family: Arial, Helvetica, sans-serif;
 }
+
 .score_val {
 	color: gold;
 	font-weight: bold;
 }
+
 @media only screen and (max-width: 1080px) {
-    .message{
+    .message {
 		font-size: 50px;
 		top: 50%;
 		white-space: nowrap;
 	}
-	.score{
+	.score {
 		font-size: 8vh;
 	}
-	.bird{
+	.bird {
 		width: 120px;
 		height: 90px;
 	}
-	.pipe_sprite{
+	.pipe_sprite {
 		width: 14vw;
 	}
+}
+
+/* Header and Menu Styles */
+
+header {
+	position: absolute; /* Positionne le menu au-dessus du fond */
+	top: 0; /* Place le menu en haut de la page */
+	width: 100%; /* Prend toute la largeur de la page */
+	padding: 20px; /* Espace autour du menu */
+	display: flex;
+	justify-content: flex-end; /* Place le menu à droite */
+	box-sizing: border-box; /* Pour inclure le padding dans la largeur du header */
+	z-index: 200; /* Assure que le menu est toujours au-dessus des autres éléments */
+}
+
+.menu-container {
+	display: flex;
+	align-items: center;
+	margin-right: 20px;
+}
+
+.menu-icon {
+	font-size: 50px;
+	cursor: pointer;
+	color: #fff;
+}
+
+a {
+	text-decoration: none;
+	color: rgb(255, 255, 255);
 }

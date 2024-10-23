@@ -1,11 +1,39 @@
 body {
-    background: url("images/background.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; 
-    margin: 0; 
-  }
+  background: url("images/background.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  position: relative; /* Nécessaire pour que le header soit positionné par rapport au body */
+}
+
+header {
+  position: absolute; /* Positionne le menu au-dessus du fond */
+  top: 0; /* Le place en haut de la page */
+  width: 100%; /* Prend toute la largeur de la page */
+  padding: 20px; /* Espace autour du menu */
+  display: flex;
+  justify-content: flex-end; /* Place le menu à droite */
+  box-sizing: border-box; /* Pour inclure le padding dans la largeur du header */
+}
+
+.menu-container {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.menu-icon {
+  font-size: 50px;
+  cursor: pointer;
+  color: #fff;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
