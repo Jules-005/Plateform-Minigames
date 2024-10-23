@@ -94,11 +94,13 @@ main {
     justify-content: space-between;
     padding: 20px;
     box-sizing: border-box;
+    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne suivante */
+    justify-content: center; /* Centre les sections horizontalement */
 }
 
 section {
-    flex: 1;
-    margin: 0 10px;
+    flex: 0 0 calc(50% - 20px); /* 50% de largeur moins la marge */
+    margin: 10px; /* Marge autour de chaque section */
     background-color: #ffb3e6; /* Rose clair */
     padding: 20px;
     box-sizing: border-box;
@@ -107,7 +109,7 @@ section {
 }
 
 section:hover {
-    transform: scale(1.05); /* Effet de zoom sur hover */
+    transform: scale(1.04); /* Effet de zoom sur hover */
 }
 
 section h2 {
@@ -121,6 +123,10 @@ a {
 }
 
 footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%; /* Prend toute la largeur */
     text-align: center;
     padding: 10px 0;
     background-color: #ff69b4; /* Rose vif */
