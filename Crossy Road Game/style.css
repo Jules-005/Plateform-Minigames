@@ -72,11 +72,11 @@ button{
 .menu-container {
 	display: flex;
 	align-items: center;
-	margin-left: 915px;
+	margin-left: 905px;
 }
 
 .menu-icon {
-	font-size: 40px;
+	font-size: 60px;
 	cursor: pointer;
 
 }
