@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pong Game</title>
+</head>
+<style>
+    @import url('httpsL//fonts.googleapis.com/css2?family=Poppins&display=swap');
+    * {
+        font-family: 'Poppins', sans-serif;
+    }
+    div{
+        text-align: center;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        position: fixed;
+        margin-top: 120px;
+        margin-left: 550px;
+    }
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background: linear-gradient(270deg, #ffefba, #ffffff, #ffefba, #ffffff);
+            background-size: 400% 400%; /* Pour permettre à l'animation de bouger */
+            animation: gradient-animation 10s ease infinite; /* Durée et type d'animation */
+}
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%; /* Début de l'animation */
+    }
+    50% {
+        background-position: 100% 50%; /* Milieu de l'animation */
+    }
+    100% {
+        background-position: 0% 50%; /* Fin de l'animation */
+    }
+}
+    header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    margin-left: 850px;
+}
+
+#menu-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+#menu-icon {
+    font-size: 50px;
+    cursor: pointer;
+    margin-right: 20px;
+    color: #000000;
+}
+.menu-icon:hover {
+    transform: scale(1.12); /* Effet de zoom sur hover */
+}
+#overlay {
+    display: none; /* Masqué par défaut */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Assurez-vous que la couleur est semi-transparente */
+    z-index: 10;
+}
+a{
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+</style>
+
+<body>
+    <header>
+        <div id="menu-container">
+            <span id="menu-icon"><a href="../index.html">☰</a></span>
+        </div>
+    </header>
+    <div>
+    <h1>Ping-pong Game</h1> <br><br>
+    <canvas></canvas>
+    <p>Control the left player by using up and down arrow keys</p>
+    <script src="./script.js"></script>
+</div>
+</body>
+</html>

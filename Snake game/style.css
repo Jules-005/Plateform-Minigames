@@ -103,7 +103,9 @@ header {
     margin-right: 20px;
     color: #fff;
 }
-
+.menu-icon:hover {
+  transform: scale(1.12); /* Effet de zoom sur hover */
+}
 #overlay {
     display: none; /* Masqué par défaut */
     position: fixed;

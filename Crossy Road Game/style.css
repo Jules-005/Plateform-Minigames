@@ -80,7 +80,9 @@ button{
 	cursor: pointer;
 
 }
-
+.menu-icon:hover {
+    transform: scale(1.12); /* Effet de zoom sur hover */
+}
 a {
 	text-decoration: none;
 	color: rgb(0, 0, 0);
