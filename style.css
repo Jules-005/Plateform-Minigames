@@ -1,16 +1,20 @@
 body {
     margin: 0;
     font-family: 'Comic Sans MS', cursive, sans-serif;
-    background-color: #f0e68c; /* Jaune pastel */
     color: #333;
+    background: url("https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHM5emQ0dTVlcXV3aXpqZnpxNGZiYW9zODZodmdwb2xhb3ZzbncwcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wR77d4zcNpkJZv9HV1/giphy.gif");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100vh; /* Assure que le body a la hauteur de la fenêtre */
 }
 
 header {
     display: flex;
     align-items: center;
     padding: 20px;
-    background-color: #ff69b4; /* Rose vif */
-    border-bottom: 5px solid #ff1493; /* Rose foncé */
+    background-color: rgba(30, 30, 30, 0.8); 
+    border-bottom: 5px solid rgba(255, 255, 255, 0.5);
 }
 
 .logo {
@@ -101,11 +105,19 @@ main {
 section {
     flex: 0 0 calc(50% - 20px); /* 50% de largeur moins la marge */
     margin: 10px; /* Marge autour de chaque section */
-    background-color: #ffb3e6; /* Rose clair */
     padding: 20px;
     box-sizing: border-box;
     border-radius: 15px;
     transition: transform 0.3s;
+    position: relative; /* Positionnement relatif pour le lien */
+}
+
+section a {
+    display: block; /* Le lien occupera toute la section */
+    height: 100%; /* Prend toute la hauteur de la section */
+    width: 100%; /* Prend toute la largeur de la section */
+    text-decoration: none; /* Enlève le soulignement du lien */
+    color: #fff; /* Couleur du texte */
 }
 
 section:hover {
@@ -114,12 +126,12 @@ section:hover {
 
 section h2 {
     text-align: center;
-    color: #ff1493; /* Rose foncé */
+    color: #fff; 
 }
 
 a {
     text-decoration: none;
-    color: #ff1493; /* Rose foncé */
+    color: #fff; 
 }
 
 footer {
@@ -129,6 +141,69 @@ footer {
     width: 100%; /* Prend toute la largeur */
     text-align: center;
     padding: 10px 0;
-    background-color: #ff69b4; /* Rose vif */
+    background-color: rgba(30, 30, 30, 0.8);
     color: #fff;
+}
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%; /* Début de l'animation */
+    }
+    50% {
+        background-position: 100% 50%; /* Milieu de l'animation */
+    }
+    100% {
+        background-position: 0% 50%; /* Fin de l'animation */
+    }
+}
+/* Spécificité pour chaque section avec des dégradés */
+.snake {
+    background: linear-gradient(270deg, #222738, #181825, #222738, #181825);
+    background-size: 400% 400%; /* Pour permettre à l'animation de bouger */
+    animation: gradient-animation 10s ease infinite; /* Durée et type d'animation */
+}
+
+.flappy {
+    background: linear-gradient(270deg, #87CEEB, #90EE90, #87CEEB, #90EE90);
+    background-size: 400% 400%;
+    animation: gradient-animation 10s ease infinite;
+}
+
+.espace {
+    background: linear-gradient(270deg, #000, rgba(255, 255, 255, 0.1), #000, rgba(255, 255, 255, 0.1));
+    background-size: 400% 400%;
+    animation: gradient-animation 10s ease infinite;
+}
+
+.deux {
+    background: linear-gradient(270deg, #faf8ef, #7d7d7d, #faf8ef, #7d7d7d);
+    background-size: 400% 400%;
+    animation: gradient-animation 10s ease infinite;
+}
+
+.Crossy {
+    background: linear-gradient(270deg, #7CFC00, #003366, #7CFC00, #003366);
+    background-size: 400% 400%;
+    animation: gradient-animation 10s ease infinite;
+}
+
+.Tetris {
+    background: linear-gradient(270deg, #9c9c9c, #222738, #9c9c9c, #222738);
+    background-size: 400% 400%;
+    animation: gradient-animation 10s ease infinite;
+}
+
+.tower {
+    background: linear-gradient(270deg, #333344, #7d7d7d, #333344, #7d7d7d);
+    background-size: 400% 400%;
+    animation: gradient-animation 10s ease infinite;
+}
+.dino {
+    background: linear-gradient(270deg, #333333, #f4e285, #333333, #333333);
+    background-size: 400% 400%; /* Pour permettre à l'animation de bouger */
+    animation: gradient-animation 10s ease infinite; /* Durée et type d'animation */
+}
+.car {
+    background: linear-gradient(270deg, #979797, #ffffff, #979797, #ffffff);
+    background-size: 400% 400%; /* Pour permettre à l'animation de bouger */
+    animation: gradient-animation 10s ease infinite; /* Durée et type d'animation */
 }
