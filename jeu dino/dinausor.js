@@ -573,13 +573,15 @@ let colorMenuUnlocked = localStorage.getItem('colorMenuUnlocked') === 'true'; //
 // Fonction pour mettre à jour l'affichage des pièces
 function updateCoins() {
     document.getElementById('coin-display').innerText = coins;
+    localStorage.setItem('coins', coins); // Sauvegarder la nouvelle valeur des coins dans localStorage
 }
 
 // Fonction pour déverrouiller le menu de couleurs
 function unlockColorMenu() {
     if (coins >= 5) { // Vérifie si le joueur a au moins 5 pièces
         coins -= 5; // Retire 5 pièces
-        updateCoins(); // Met à jour l'affichage des pièces
+        localStorage.setItem('coins', coins); // Sauvegarder la nouvelle valeur des coins dans localStorage
+        updateCoins(); // Mettre à jour l'affichage des coins
 
         // Affiche le menu de couleurs
         document.getElementById('color-picker').style.display = 'block';
@@ -613,5 +615,6 @@ if (colorMenuUnlocked) {
 } else {
     document.getElementById('color-picker').style.display = 'none'; // Cache le menu de couleur par défaut
 }
-updateCoins();
+localStorage.setItem('coins', coins); // Sauvegarder la nouvelle valeur des coins dans localStorage
+updateCoins(); // Mettre à jour l'affichage des coins
 displaySkins();
