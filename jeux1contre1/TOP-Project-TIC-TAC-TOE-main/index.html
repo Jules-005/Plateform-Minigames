@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap" rel="stylesheet">
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic tac toe</title>
+</head>
+
+<body>
+    <header>
+        <h1>Tic tac toe</h1>
+    </header>
+    <div class="start-container"><button class="start-button">Start Game</button>
+    <p class="result-para"></p></div>
+    <main>
+        <div class="menu" id="player-1">
+            <div class="human-robot-menu">
+                <button><img class="human-button current" src="img/user.png" alt="Human icon"></button>
+                <button><img class="robot-button"  src="img/robot.png" alt="Human icon"></button>
+            </div>
+            <div class="menu-name" >
+                <h2>Player 1</h2>
+                <button id="edit-player-1"><img  src="img/edit.png" alt="Edit player name"></button>
+            </div>
+            <div class="shape-container">
+                <div class="shape"><span class="o">o</span></div>
+                <div><button id="change-shape-1"><img src="img/exchange.png" alt="Change shape img"></button></div>
+            </div>
+        
+        <div class="score">
+            <h2>Score:</h2>
+            <p>0</p>
+        </div>
+        </div>
+        <div class="board">
+            <div data-cellplace="0" class="cell" id="cell-0"></div>
+            <div data-cellplace="1" class="cell" id="cell-1"></div>
+            <div data-cellplace="2" class="cell" id="cell-2"></div>
+            <div data-cellplace="3" class="cell" id="cell-3"></div>
+            <div data-cellplace="4" class="cell" id="cell-4"></div>
+            <div data-cellplace="5" class="cell" id="cell-5"></div>
+            <div data-cellplace="6" class="cell" id="cell-6"></div>
+            <div data-cellplace="7" class="cell" id="cell-7"></div>
+            <div data-cellplace="8" class="cell" id="cell-8"></div>
+
+        </div>
+        <div class="menu" id="player-2">
+            <div class="human-robot-menu">
+                <button><img class="human-button current" src="img/user.png" alt="Human icon"></button>
+                <button><img class="robot-button"  src="img/robot.png" alt="Human icon"></button></div>
+            <div class="menu-name">
+                <h2 >Player 2</h2>
+                <button id="edit-player-2"><img  src="img/edit.png" alt="Edit player name"></button>
+                
+            </div>
+            <div class="shape-container">
+                <div class="shape"><span class="x">x</span></div>
+                <div><button id="change-shape-1"><img src="img/exchange.png" alt="Change shape img"></button></div>
+            </div>
+            <div class="score">
+                <h2>Score:</h2>
+                <p>0</p>
+            </div>
+
+        </div>
+    </main>
+    <footer>
+        <a href="https://github.com/IlyaEru"><img src="img/github.png" alt="github link"></a>
+        <a class='gitHub-name' href="https://github.com/IlyaEru">IlyaEru</a>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

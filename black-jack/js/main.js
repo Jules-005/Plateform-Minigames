@@ -191,7 +191,7 @@ function updateWallet() {
         wallet -= player.wager;
     }
     if (wallet === 0) {
-        playAgainBtn.innerHTML = 'Tu n a plus de crédits. Relance la page ete réesaye';
+        playAgainBtn.innerHTML = 'Tu n as plus de crédits. Relance la page et réesaye';
     }
 }
 

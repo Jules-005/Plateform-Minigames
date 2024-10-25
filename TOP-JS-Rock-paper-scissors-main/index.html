@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1 class="hero">Human Vs The Mighty Computer</h1>
+        <h2 class="second-hero">Try and win against the Computer in a best to 5 rock, paper, scissors game</h2>
+    </div>
+    <div class="content"> 
+        <button id="Rock">
+            <img src="img/rock.svg" alt="rockimage">
+            <p>rock</p>
+        </button>
+        <button id="Paper"><img src="img/paper.png" alt="rockimage">
+            <p>Paper</p>
+        </button>
+        <button id="Scissors"><img src="img/scissors.svg" alt="rockimage">
+            <p>Scissors</p>
+        </button>
+    </div>
+    <div class="results">
+        <h3>Results:</h3>
+        <div>
+            <p ><strong>Computer:</strong> <em class="result computer">0</em> </p>
+            <p ><strong>Player:</strong> <em class="result human">0</em> </p>
+        </div>
+        <div id="round-result-img">
+              <div id="computer-choice">
+                <p>Computer's choice:</p>
+                <div></div>
+            </div>
+             <div id="player-choice">
+                <p>Player's choice:</p>
+                <div></div>
+            </div>
+         
+        </div>
+        <p id="round-result"></p>
+        <p id="final-result"></p>
+        <button class="again hidden">Play Again?</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
