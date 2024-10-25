@@ -1,0 +1,154 @@
+body {
+    color: lightgrey;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    background: linear-gradient(270deg, #775134, #b19571, #775134, #b19571);
+    background-size: 400% 400%; /* Pour permettre à l'animation de bouger */
+    animation: gradient-animation 10s ease infinite; /* Durée et type d'animation */
+}
+@keyframes gradient-animation {
+  0% {
+      background-position: 0% 50%; /* Début de l'animation */
+  }
+  50% {
+      background-position: 100% 50%; /* Milieu de l'animation */
+  }
+  100% {
+      background-position: 0% 50%; /* Fin de l'animation */
+  }
+}
+
+  h1 {
+    color: #ff570a;
+    position: absolute;
+    text-align: center;
+    width: 200px;
+    margin-left: -100px;
+    margin-top: 150px;
+    left: 50%;
+    text-shadow: 0 0 3px #000000, 0 0 5px #000;
+  }
+  
+  h2 {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    color: lightgrey;
+  }
+  
+  h3 {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    color: #fed766;
+    text-shadow:#000 0px 0px 6px;
+  }
+  
+  td {
+    border: 2px solid #20a39e;
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    vertical-align: middle;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 70px;
+    cursor: pointer;
+  }
+  
+  table {
+    margin-top: 150px;
+    border-collapse: collapse;
+    position: absolute;
+    left: 50%;
+    margin-left: -155px;
+    top: 100px;
+  }
+  
+  table tr:first-child td {
+    border-top: 0;
+  }
+  
+  table tr:last-child td {
+    border-bottom: 0;
+  }
+  
+  table tr td:first-child {
+    border-left: 0;
+  }
+  
+  table tr td:last-child {
+    border-right: 0;
+  }
+  
+  .endgame {
+    margin-top: 150px;
+    display: none;
+    /* display: block; */
+    width: 260px;
+    top: 120px;
+    /* background-color: #20a39fc2; */
+    position: absolute;
+    left: 50%;
+    margin-left: -130px;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-size: 2em;
+  }
+  
+  #replay {
+    /* background: #d72638;
+    font-family: "Comic Sans MS", cursive, sans-serif; */
+    margin-top: 150px;
+    background-color: #d72638;
+    border-color: #d72638;
+    border-width: 5px;
+    border-style: solid;
+    color: #fed766;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    margin-top: 0;
+    position: fixed; /* Fixe l'en-tête en haut de la page */
+    top: 0; /* Assure que l'en-tête est en haut */
+    width: 100%; /* Prend toute la largeur */
+    z-index: 100; /* Définit un z-index élevé pour s'assurer qu'il est au-dessus */
+}
+
+
+
+#logo {
+    font-size: 48px;
+    margin: 14px;
+    flex-grow: 1;
+    color: #ffffff;
+}
+
+#menu-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+#menu-icon {
+    font-size: 50px;
+    cursor: pointer;
+    margin-right: 90px;
+    color: #ffffff;
+}
+#menu-icon:hover {
+    transform: scale(1.12); /* Effet de zoom sur hover */
+  }
+#overlay {
+    display: none; /* Masqué par défaut */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Assurez-vous que la couleur est semi-transparente */
+    z-index: 10;
+}
+a{
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}

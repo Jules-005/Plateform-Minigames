@@ -237,3 +237,8 @@ footer {
 .piere{
     background: url("Pierre papier ciseaux/img/background.jpg");
 }
+.morpion{
+    background: linear-gradient(270deg, #775134, #b19571, #775134, #b19571);
+    background-size: 400% 400%; /* Pour permettre à l'animation de bouger */
+    animation: gradient-animation 10s ease infinite; /* Durée et type d'animation */
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic Tac Toe</title>
+    <!-- adding css and javascript -->
+    <link rel="stylesheet" href="./styles.css" />
+    <!-- <script src="./script.js"></script> -->
+  </head>
+  <body>
+    <body>
+      <header>
+          <div id="logo">Un Reymond Qui Joue</div>
+          <div id="menu-container">
+              <span id="menu-icon"><a href="../../index.html">☰</a></span>
+          </div>
+      </header>    
+    <!-- heading -->
+    <h1>Morpion</h1>
+
+    <!-- making the table -->
+    <table>
+      <tr>
+        <td class="cell" id="0"></td>
+        <td class="cell" id="1"></td>
+        <td class="cell" id="2"></td>
+      </tr>
+      <tr>
+        <td class="cell" id="3"></td>
+        <td class="cell" id="4"></td>
+        <td class="cell" id="5"></td>
+      </tr>
+      <tr>
+        <td class="cell" id="6"></td>
+        <td class="cell" id="7"></td>
+        <td class="cell" id="8"></td>
+      </tr>
+    </table>
+
+    <!-- the endgame -->
+    <div class="endgame">
+      <div class="text"></div>
+      <!-- the button to replay -->
+      <button onclick="startGame()" id="replay"><h2><pre> Rejouer </pre></h2></button>
+    </div>
+
+    <!-- adding javascript -->
+    <script src="./script.js"></script>
+
+  </body>
+</html>
