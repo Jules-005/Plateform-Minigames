@@ -224,3 +224,8 @@ footer {
     background-size: 400% 400%; /* Pour permettre à l'animation de bouger */
     animation: gradient-animation 10s ease infinite; /* Durée et type d'animation */
 }
+.solitaire{
+    background: linear-gradient(270deg, #147246, #0d4b2e, #147246, #0d4b2e);
+    background-size: 400% 400%; /* Pour permettre à l'animation de bouger */
+    animation: gradient-animation 10s ease infinite; /* Durée et type d'animation */
+}
