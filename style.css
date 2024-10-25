@@ -137,7 +137,7 @@ a {
 }
 
 footer {
-    position: absolute;
+    position: relative; /* Par rapport au conteneur */
     left: 0;
     bottom: 0;
     width: 100%; /* Prend toute la largeur */
