@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ca-fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Le Chevalier Perdu</title>
+    <style>
+      body {
+        background-color: #239da7;
+        
+        background: linear-gradient(270deg, #239da7, #72ecce, #239da7, #72ecce);
+            background-size: 400% 400%; /* Pour permettre à l'animation de bouger */
+            animation: gradient-animation 10s ease infinite; /* Durée et type d'animation */
+}
+.body{
+  margin-top: 100px;
+}
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%; /* Début de l'animation */
+    }
+    50% {
+        background-position: 100% 50%; /* Milieu de l'animation */
+    }
+    100% {
+        background-position: 0% 50%; /* Fin de l'animation */
+    }
+}
+
+      canvas {
+        display: block;
+        margin: auto;
+        box-shadow: 0px 20px 50px black;
+        cursor: pointer;
+      }
+
+      header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    margin-top: 0;
+    position: fixed; /* Fixe l'en-tête en haut de la page */
+    top: 0; /* Assure que l'en-tête est en haut */
+    width: 100%; /* Prend toute la largeur */
+    z-index: 100; /* Définit un z-index élevé pour s'assurer qu'il est au-dessus */
+}
+
+
+
+#logo {
+    font-size: 48px;
+    margin: 14px;
+    flex-grow: 1;
+    color: #ffffff;
+}
+
+#menu-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+#menu-icon {
+    font-size: 50px;
+    cursor: pointer;
+    margin-right: 70px;
+    color: #ffffff;
+}
+#menu-icon:hover {
+    transform: scale(1.12); /* Effet de zoom sur hover */
+  }
+#overlay {
+    display: none; /* Masqué par défaut */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Assurez-vous que la couleur est semi-transparente */
+    z-index: 10;
+}
+a{
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div id="logo">Un Reymond Qui Joue</div>
+      <div id="menu-container">
+          <span id="menu-icon"><a href="../index.html">☰</a></span>
+      </div>
+  </header> 
+    <!-- Créer la balise canvas et définir ses dimensions -->
+    <div  class="body">
+      <canvas width="500" height="750"> </canvas>
+    </div>
+    <script>
+      let leCanvas = document.querySelector("canvas");
+      let ctx = leCanvas.getContext("2d");
+
+      ////////////////////////////////////////////////
+      //************ SECTIONS DES OBJETS ************//
+      ////////////////////////////////////////////////
+
+      let paysage = {
+        //Objet paysage
+        img: new Image(),
+        posX: 0, //Position X de l'objet
+        posY: -1080, //Position Y de l'objet
+        vitesseY: 3, //Vitesse Y de l'objet
+        largeur: 454, //Largeur d'une vignette
+        hauteur: 733, //Hauteur d'une vignette
+      };
+      paysage.img.src = "images/falaise.png";
+      let chevalier = {
+        img: new Image(),
+        sonDegat: new Audio("sons/degat.wav"),
+        sontMort: new Audio("sons/mort.mp3"),
+        largeur: 102, //Largeur d'une vignette
+        hauteur: 198, //Hauteur d'une vignette
+        nbVignettes: 8, //Le nombre de vignettes dans la feuille de sprites
+        indexVignette: 0, //Index de la vignette à afficher
+        sourceX: 0, //Coordonnée X de la source de chaque vignette
+        posX: 0, //Position X de l'objet
+        posY: 0, //Position Y de l'objet
+        vitesseX: 5, //Vitesse X
+        vitesseBas: 2, //Vitesse vers le haut
+        vitesseHaut: 4, //Vitesse vers le bas
+      };
+      chevalier.posX = leCanvas.width / 2 - chevalier.largeur / 2;
+      chevalier.posY = leCanvas.height - chevalier.hauteur - 50;
+      chevalier.img.src = "images/escalade.png";
+      let unCoeur = {
+        img: new Image(),
+        posX: 0, // Position Y de l'objet
+        posY: 0, // Position X de l'objet
+        largeur: 60, //largeur 20 pix minimum
+        hauteur: 55, //hauteur 20 pix minimum
+        nombreVie: 3, //Nombre de vie à afficher de base
+      };
+      unCoeur.posY = leCanvas.height - unCoeur.hauteur;
+      unCoeur.img.src = "images/coeur.png";
+      let coin = {
+        img: new Image(),
+        sonCoin: new Audio(),
+        largeur: 32, //Largeur d'une vignette
+        hauteur: 32, //Hauteur d'une vignette
+        nbVignettes: 6, //Le nombre de vignettes dans la feuille de sprites
+        indexVignette: 0, //Index de la vignette à afficher
+        sourceX: 0, //Coordonnée X de la source de chaque vignette
+        posX: 0, //Position X de l'objet
+        posY: 0, //Position Y de l'objet
+        vitesseX: 0, //Vitesse X
+        vitesseY: 12, //Vitesse Y de l'objet
+      };
+      coin.img.src = "images/coin.png";
+      apparaitreAleatoirement(coin, 3000);
+      let rubis = {
+        img: new Image(),
+        sonRubis: new Audio("sons/rubis.wav"),
+        largeur: 14, //Largeur d'une vignette
+        hauteur: 15, //Hauteur d'une vignette
+        nbVignettes: 8, //Le nombre de vignettes dans la feuille de sprites
+        indexVignette: 0, //Index de la vignette à afficher
+        sourceX: 0, //Coordonnée X de la source de chaque vignette
+        posX: 0, //Position X de l'objet
+        posY: 0, //Position Y de l'objet
+        vitesseX: 0, //Vitesse X
+        vitesseY: 12, //Vitesse Y de l'objet
+      };
+      rubis.img.src = "images/rubis.png";
+      rubis.sonRubis.volume = 0.5;
+      apparaitreAleatoirement(rubis, 9000);
+      let deplacement = {
+        flecheDroite: false,
+        flecheGauche: false,
+        flecheHaut: false,
+        flecheBas: false,
+      };
+      let menu = {
+        img: new Image(),
+      };
+      menu.img.src = "images/ART2.png";
+      let menuMort = {
+        img: new Image(),
+        son: new Audio("sons/menuMort.mp3"),
+      };
+      menuMort.son.volume = 0.1;
+      menuMort.img.src = "images/menuMort.png";
+      let menuVictoire = {
+        img: new Image(),
+        son: new Audio(),
+      };
+      menuVictoire.img.src = "images/menuVictoire.png";
+      let roche = {
+        img: new Image(),
+        largeur: 84, //Largeur d'une vignette
+        hauteur: 84, //Hauteur d'une vignette
+        nbVignettes: 4, //Le nombre de vignettes dans la feuille de sprites
+        indexVignette: 0, //Index de la vignette à afficher
+        sourceX: 0, //Coordonnée X de la source de chaque vignette
+        posX: 0, //Position X de l'objet
+        posY: 0, //Position Y de l'objet
+        vitesseY: 12, //Vitesse Y de l'objet
+      };
+      roche.img.src = "images/roche.png";
+      apparaitreAleatoirement(roche, 3000);
+
+      let lesPotions = [];
+
+      ////////////////////////////////////////////////
+      //****** SECTIONS DE VARIABLES ET DIVERS ******//
+      ////////////////////////////////////////////////
+      let musique = new Audio(
+        "sons/musique/musique" + +Math.ceil(Math.random() * 3) + ".mp3"
+      );
+      let sonADejaJouer = true;
+      //Score commence à 0
+      let score = 0;
+      //Le jeu n'est pas encore commencé
+      let debutJeu = false;
+      //Afficher le menu du départ
+      let intervalIDAfficherMenu = setInterval(afficherMenu, 1000 / 60);
+      //Variable d'interval pour afficher le menu de victoire
+      let intervalIDAfficherVictoire = setInterval(
+        afficherMenuVictoire,
+        1000 / 60
+      );
+      //Variable d'interval pour afficher les animations
+      let intervalIDAnimations;
+      //Variable d'interval pour afficher le jeu
+      let intervalIDActualiserJeu;
+      //Afficher les potions à chaque 5 secondes
+      let intervalIDMettrePotion = setInterval(ajouterUnePotion, 5000);
+      document.addEventListener("load", afficherMenu);
+      document.addEventListener("load", afficherMenuVictoire);
+      leCanvas.addEventListener("click", demarrerJeu);
+
+      ////////////////////////////////////////////////
+      //********** SECTIONS DES FONCTIONS **********//
+      ////////////////////////////////////////////////
+
+      ///////////----------MENUS----------///////////
+
+      function afficherMenu() {
+        ctx.drawImage(menu.img, 0, 0, leCanvas.width, leCanvas.height);
+      }
+      // Afficher le menu mort
+      function afficherMenuMort() {
+        if (chevalier.posY >= leCanvas.height) {
+          chevalier.posY = leCanvas.height + chevalier.hauteur;
+          ctx.drawImage(menuMort.img, 0, 0, leCanvas.width, leCanvas.height);
+          //Jouer le son du menu seulement une fois après une mort
+          if (sonADejaJouer) {
+            menuMort.son.loop = false;
+            menuMort.son.play();
+            sonADejaJouer = false;
+          }
+          debutJeu = false;
+          // Permettre la reinitialisation
+          leCanvas.addEventListener("click", reinitialiserJeu);
+        }
+      }
+      //Afficher le menu victoire
+      function afficherMenuVictoire() {
+        //SI le score est égale ou supérieur à 20, arrêter les animations et afficher l'écran de victoire
+        if (score >= 20) {
+          ctx.drawImage(
+            menuVictoire.img,
+            0,
+            0,
+            leCanvas.width,
+            leCanvas.height
+          );
+          clearInterval(intervalIDActualiserJeu);
+          clearInterval(intervalIDAnimations);
+          debutJeu = false;
+          leCanvas.addEventListener("click", reinitialiserJeu);
+        }
+      }
+      ///////////----------GESTION DU JEU----------///////////
+
+      function demarrerJeu() {
+        if (debutJeu == false) {
+          clearInterval(intervalIDAfficherMenu);
+          // Actualiser le jeu
+          intervalIDAnimations = setInterval(actualiserAnimations, 1000 / 12);
+          intervalIDActualiserJeu = setInterval(actualiserJeu, 1000 / 60);
+          // Jouer musique
+          musique.volume = 0.1;
+          musique.loop = true;
+          musique.play();
+          // Permettre le déplacement du personnage
+          document.addEventListener("keydown", presserTouche);
+          document.addEventListener("keyup", relacherTouche);
+          debutJeu = true;
+          leCanvas.removeEventListener("click", demarrerJeu);
+        }
+      }
+
+      function reinitialiserJeu() {
+        // clearInterval(intervalIDAfficherVictoire);
+        //Réinitialiser la hauteur du coin
+        apparaitreAleatoirement(coin, 3000);
+        //Réinitialiser la hauteur de la roche
+        apparaitreAleatoirement(roche, 3000);
+        //Réinitialiser la hauteur du rubis
+        apparaitreAleatoirement(rubis, 9000);
+        //Réinitialiser les touches pour se déplacer
+        document.addEventListener("keydown", presserTouche);
+        document.addEventListener("keyup", relacherTouche);
+        //Faire réapparaitre le chevalier au centre du canvas
+        chevalier.posX = leCanvas.width / 2 - chevalier.largeur / 2;
+        chevalier.posY = leCanvas.height - chevalier.hauteur - 50;
+        //Le score se réinitialise à 0
+        score = 0;
+        //Réinitialiser les animations
+        clearInterval(intervalIDActualiserJeu);
+        clearInterval(intervalIDAnimations);
+        intervalIDAnimations = setInterval(actualiserAnimations, 1000 / 12);
+        intervalIDActualiserJeu = setInterval(actualiserJeu, 1000 / 60);
+        //Réinitialiser le nombre de vie
+        unCoeur.nombreVie = 3;
+        //Remettre la musique
+        musique.volume = 0.1;
+        //Permettre au joueur de cliquer pour rejouer
+        leCanvas.removeEventListener("click", reinitialiserJeu);
+        //Le jeu est commencé
+        debutJeu = true;
+        //Empecher le son de la mort de se repeter en boucle
+        sonADejaJouer = true;
+      }
+
+      ///////////----------ACTUALISATION D'OBJETS ET ANIMATIONS----------///////////
+      // Actualiser le jeu à 60 IPS
+      function actualiserJeu() {
+        ctx.clearRect(0, 0, leCanvas.width, leCanvas.height);
+        //Afficher le paysage et gérer son déplacement
+        afficherPaysage();
+        //Afficher le chevalier ainsi que gérer ses déplacements, sa mort, et ses collisions
+        deplacerChevalier();
+        //Afficher le coin, gérer ses déplacements ainsi que ses collisions
+        afficherCoin();
+        //Afficher le rubis, gérer ses déplacements ainsi que ses collisions
+        afficherRubis();
+        //Afficher la roche, gérer ses déplacements ainsi que ses collisions
+        afficherRoche();
+        //Afficher les potions
+        afficherPotions();
+        deplacerUnePotion();
+        //Afficher le score
+        afficherScore();
+        //Afficher le menu de mort dans le cas où le chevalier mourrerait
+        afficherMenuMort();
+        //Afficher les points de vie
+        afficherCoeur();
+      }
+      // Actualiser les animations à leur propres framerates (12 IPS)
+      function actualiserAnimations() {
+        animerObjets(coin);
+        animerObjets(rubis);
+        animerObjets(roche);
+        animerObjets(chevalier);
+      }
+
+      ///////////----------GESTION DES TOUCHES----------///////////
+
+      function presserTouche(event) {
+        //Enregistrer si une touche gauche/droite ou A/D et haut/bas ou W/S est pressée
+        //console.log("presserTouche", event.keyCode);
+        if (event.keyCode == 39 || event.keyCode == 68) {
+          //flèche droite et D
+          deplacement.flecheDroite = true;
+        }
+        if (event.keyCode == 37 || event.keyCode == 65) {
+          //flèche gauche et A
+          deplacement.flecheGauche = true;
+        }
+        if (event.keyCode == 38 || event.keyCode == 87) {
+          //flèche hautet W
+
+          deplacement.flecheHaut = true;
+        }
+        if (event.keyCode == 40 || event.keyCode == 83) {
+          //flèche bas et S
+          deplacement.flecheBas = true;
+        }
+        //Enlever le son
+        if (event.keyCode == 189) {
+          // Appuyer sur -
+          coin.sonCoin.volume = 0;
+          rubis.sonRubis.volume = 0;
+          menuMort.son.volume = 0;
+          chevalier.sonDegat.volume = 0;
+          chevalier.sontMort.volume = 0;
+          musique.volume = 0;
+        }
+        //Reinitialiser le son
+        if (event.keyCode == 187) {
+          // Appuyer sur =
+          coin.sonCoin.volume = 1;
+          rubis.sonRubis.volume = 0.5;
+          menuMort.son.volume = 0.1;
+          chevalier.sonDegat.volume = 1;
+          chevalier.sontMort.volume = 1;
+          musique.volume = 0.1;
+        }
+      }
+
+      function relacherTouche(event) {
+        //console.log("relacherTouche", event.keyCode);
+
+        //Enregistrer si une touche gauche/droite ou A/D et haut/bas ou W/S et M est relâchée
+        if (event.keyCode == 39 || event.keyCode == 68) {
+          //flèche droite et D
+          deplacement.flecheDroite = false;
+        }
+        if (event.keyCode == 37 || event.keyCode == 65) {
+          //flèche gauche et A
+          deplacement.flecheGauche = false;
+        }
+        if (event.keyCode == 38 || event.keyCode == 87) {
+          //flèche haut et W
+          deplacement.flecheHaut = false;
+        }
+        if (event.keyCode == 40 || event.keyCode == 83) {
+          //flèche bas et S
+          deplacement.flecheBas = false;
+        }
+        // Appuyer (relacher) M pour retourner au menu lors de la mort ou de la victoire
+        if (event.keyCode == 77 && chevalier.posY >= leCanvas.height) {
+          location.reload();
+        }
+      }
+      ///////////----------FONCTIONS AFFICHER OBJETS----------///////////
+
+      function deplacerChevalier() {
+        //Gérer la vitesse de déplacement du chevalier//
+
+        if (
+          deplacement.flecheDroite &&
+          chevalier.img.src.includes("escalade")
+        ) {
+          chevalier.posX += chevalier.vitesseX;
+        }
+        if (
+          deplacement.flecheGauche &&
+          chevalier.img.src.includes("escalade")
+        ) {
+          chevalier.posX -= chevalier.vitesseX;
+        }
+        if (deplacement.flecheHaut && chevalier.img.src.includes("escalade")) {
+          chevalier.posY -= chevalier.vitesseHaut;
+        }
+        if (deplacement.flecheBas && chevalier.img.src.includes("escalade")) {
+          chevalier.posY += chevalier.vitesseBas;
+        }
+
+        //Empêcher le chevalier de sortir des limites du canvas//
+
+        if (chevalier.posX > leCanvas.width - chevalier.largeur) {
+          chevalier.posX = leCanvas.width - chevalier.largeur;
+        }
+        if (chevalier.posX < 0) {
+          chevalier.posX = 0;
+        }
+        if (chevalier.posY < 0) {
+          chevalier.posY = 0;
+        }
+
+        //Permettre au chevalier mort de sortir au bas du canvas, mais empêcher le chevalier vivant//
+
+        if (
+          chevalier.posY > leCanvas.height - chevalier.hauteur &&
+          chevalier.img.src.includes("escalade")
+        ) {
+          chevalier.posY = leCanvas.height - chevalier.hauteur;
+        }
+
+        //Dessiner le chevalier//
+
+        dessinerObjet(chevalier);
+      }
+
+      function afficherPaysage() {
+        //Deplacer le paysage et lui faire faire un loop//
+
+        paysage.posY += paysage.vitesseY;
+        if (paysage.posY > 0) {
+          paysage.posY = -1080;
+        }
+
+        //Dessiner le paysage//
+
+        ctx.drawImage(paysage.img, paysage.posX, paysage.posY);
+      }
+
+      function afficherCoin() {
+        //Deplacer le coin et gérer son loop//
+
+        coin.posY += coin.vitesseY;
+        if (coin.posY > leCanvas.height) {
+          apparaitreAleatoirement(coin, 3000);
+        }
+
+        //Gérer les collisions du coin avec le chevalier//
+
+        let siCollisionChevalierCoin = detecterCollision(chevalier, coin);
+        if (siCollisionChevalierCoin) {
+          console.log("Collision coin : " + siCollisionChevalierCoin);
+          // Jouer un son aléatoire entre 3 sons de coins
+          coin.sonCoin.src =
+            "sons/coin/coin_0" + Math.ceil(Math.random() * 3) + ".wav";
+          coin.sonCoin.play();
+          score++;
+          apparaitreAleatoirement(coin, 3000);
+        }
+
+        //Dessiner le coin//
+
+        dessinerObjet(coin);
+      }
+
+      function afficherRubis() {
+        //Deplacer le rubis et gérer son loop//
+
+        rubis.posY += rubis.vitesseY;
+        if (rubis.posY > leCanvas.height) {
+          apparaitreAleatoirement(rubis, 9000);
+        }
+
+        //Gérer les collisions du rubis avec le chevalier//
+
+        let siCollisionChevalierRubis = detecterCollision(chevalier, rubis);
+        if (siCollisionChevalierRubis) {
+          console.log("Collision rubis : " + siCollisionChevalierRubis);
+          rubis.sonRubis.play();
+          score += 3;
+          apparaitreAleatoirement(rubis, 9000);
+        }
+
+        //Dessiner le rubis//
+
+        dessinerObjet(rubis);
+      }
+
+      function afficherRoche() {
+        //Deplacer la roche et gérer son loop//
+
+        roche.posY += roche.vitesseY;
+        if (roche.posY > leCanvas.height) {
+          apparaitreAleatoirement(roche, 3000);
+        }
+
+        //Gérer les collisions de la roche avec le chevalier//
+
+        let siCollisionChevalierRoche = detecterCollision(chevalier, roche);
+        if (siCollisionChevalierRoche && unCoeur.nombreVie > 0) {
+          // Afficher clignotement rouge lorsque le personnage prend des dégats
+          console.log("Collision roche : " + siCollisionChevalierRoche);
+          unCoeur.nombreVie--;
+          chevalier.img.src = "images/degats.png";
+          chevalier.sonDegat.play();
+          apparaitreAleatoirement(roche, 3000);
+        } else if (unCoeur.nombreVie <= 0) {
+          // Le personnage meurt si il n'a plus de vie
+          chevalier.nbVignettes = 4;
+          chevalier.img.src = "images/mort.png";
+          document.removeEventListener("keydown", presserTouche);
+          chevalier.posY += 8;
+        } else {
+          // Si le personnage prend des dégats, mais qu'il n'est pas mort
+          chevalier.nbVignettes = 8;
+          chevalier.img.src = "images/escalade.png";
+        }
+        // Si le personnage meurt au contact de la roche, jouer le sonMort
+        if (siCollisionChevalierRoche && unCoeur.nombreVie <= 0) {
+          chevalier.sontMort.play();
+        }
+
+        //Dessiner la roche//
+
+        dessinerObjet(roche);
+      }
+      //Ajouter des portions dans le array
+      function ajouterUnePotion() {
+        let unePotion = {
+          img: new Image(),
+          posX: 0,
+          posY: 0,
+          hauteur: 40,
+          largeur: 30,
+          vitesseY: 12,
+        };
+        //Gerer la position de chaque potions
+        unePotion.posX = Math.random() * leCanvas.width - unePotion.largeur;
+        unePotion.posY = 0 - unePotion.hauteur;
+        if (unePotion.posX < 0) {
+          unePotion.posX = 0;
+        }
+        //Load l'image de la potion
+        unePotion.img.src = "images/potion2.png";
+        lesPotions.push(unePotion);
+      }
+      //Gerer le déplacement des potions
+      function deplacerUnePotion() {
+        for (let index = 0; index < lesPotions.length; index++) {
+          let unePotion = lesPotions[index];
+          unePotion.posY += unePotion.vitesseY;
+          if (unePotion.posY > leCanvas.height) {
+            lesPotions.splice(index, 1);
+          }
+          ctx.drawImage(unePotion.img, unePotion.posX, unePotion.posY);
+        }
+      }
+      //Gerer les collisions des potions
+      function afficherPotions() {
+        let siCollisionChevalierPotion;
+
+        for (let index = 0; index < lesPotions.length; index++) {
+          siCollisionChevalierPotion = detecterCollision(
+            chevalier,
+            lesPotions[index]
+          );
+          if (siCollisionChevalierPotion) {
+            //S'il y a une collision....
+            lesPotions.splice(index, 1); //On enlève ce cadeau du tableau des cadeaux
+            if (unCoeur.nombreVie < 3) {
+              unCoeur.nombreVie++; //On incrémente le nombre de vie
+            }
+          }
+        }
+      }
+      //Afficher le score
+      function afficherScore() {
+        //Styles du texte
+        ctx.font = "40px Arial";
+        ctx.textBaseline = "bottom";
+        ctx.fillStyle = "#ffe200";
+        ctx.textAlign = "left";
+        ctx.fillText("Score : " + score, 0, leCanvas.height);
+        ctx.strokeStyle = "black";
+        ctx.strokeText("Score : " + score, 0, leCanvas.height);
+      }
+      //Afficher les coeurs
+      function afficherCoeur() {
+        for (let compteur = 0; compteur < unCoeur.nombreVie; compteur += 1) {
+          ctx.drawImage(
+            unCoeur.img,
+            leCanvas.width - compteur * unCoeur.largeur - unCoeur.largeur,
+            unCoeur.posY
+          );
+        }
+      }
+
+      ///////////----------FONCTIONS GÉNÉRALES----------///////////
+
+      function animerObjets(objet) {
+        //Fonction pour afficher l'animation des objets//
+
+        objet.sourceX = objet.indexVignette * objet.largeur;
+        objet.indexVignette++;
+        if (objet.indexVignette >= objet.nbVignettes) {
+          objet.indexVignette = 0;
+        }
+      }
+
+      function detecterCollision(objet1, objet2) {
+        //Fonction pour gérer les collisions entre les objets//
+
+        if (
+          objet1.posX < objet2.posX + objet2.largeur &&
+          objet1.posX + objet1.largeur > objet2.posX &&
+          objet1.posY < objet2.posY + objet2.hauteur &&
+          objet1.posY + objet1.hauteur > objet2.posY
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      function apparaitreAleatoirement(objet, hauteur) {
+        //Fonction pour ajuster l'apparition aléatoire des objets qui tombent du haut du canvas//
+
+        objet.posY = Math.random() * -hauteur - objet.hauteur;
+        objet.posX = Math.random() * leCanvas.width - objet.largeur;
+        if (objet.posX < 0) {
+          objet.posX = 0;
+        }
+      }
+
+      function dessinerObjet(objet) {
+        //Fonction pour dessiner un objet qui a une image sprite//
+
+        ctx.drawImage(
+          objet.img,
+          objet.sourceX,
+          0,
+          objet.largeur,
+          objet.hauteur,
+          objet.posX,
+          objet.posY,
+          objet.largeur,
+          objet.hauteur
+        );
+      }
+
+      ////////////////////////////////////////////////
+      //************** FIN DU SCRIPT **************//
+      ////////////////////////////////////////////////
+    </script>
+  </body>
+</html>

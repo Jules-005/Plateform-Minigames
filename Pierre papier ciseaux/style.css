@@ -55,6 +55,7 @@ body{
     display: none;
 }
 .header{
+    margin-top: 130px;
     font-family:  Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .header h1{
@@ -66,8 +67,9 @@ body{
     color: #ad1d1d;
 }
 .again{
-    height: 44px;
-    width: 140px;
+    height: 50px;
+    width: 100%;
+    margin-top: 15px;
     border: none;
     border-radius: 20px;
     font-size: 22px;
@@ -100,4 +102,38 @@ body{
 #player-choice, #computer-choice{
     display: flex;
     flex-direction: column;
+}
+header {
+    display: flex;
+    justify-content: center; /* Assure que tout est centré horizontalement */
+    align-items: center;
+    padding: 0; /* Supprime tout padding superflu */
+    margin: 0;
+    position: fixed;
+    top: 10px;
+    width: 100%;
+    z-index: 100;
+}
+
+#menu-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px; /* Si vous avez besoin d’un espacement autour du menu */
+}
+
+#menu-icon {
+    font-size: 50px;
+    cursor: pointer;
+    color: #000000;
+}
+
+#menu-icon:hover {
+    transform: scale(1.12);
+}
+
+a {
+    text-decoration: none;
+    color: black;
 }

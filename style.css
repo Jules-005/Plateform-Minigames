@@ -229,3 +229,11 @@ footer {
     background-size: 400% 400%; /* Pour permettre à l'animation de bouger */
     animation: gradient-animation 10s ease infinite; /* Durée et type d'animation */
 }
+.chevalier{
+    background: linear-gradient(270deg, #239da7, #72ecce, #239da7, #72ecce);
+    background-size: 400% 400%; /* Pour permettre à l'animation de bouger */
+    animation: gradient-animation 10s ease infinite; /* Durée et type d'animation */
+}
+.piere{
+    background: url("Pierre papier ciseaux/img/background.jpg");
+}
