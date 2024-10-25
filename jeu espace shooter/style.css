@@ -13,17 +13,20 @@ body {
 
 header {
   position: absolute; /* Positionne le menu au-dessus du fond */
-  top: 0; /* Le place en haut de la page */
+  top: 0; /* Place le menu en haut de la page */
   width: 100%; /* Prend toute la largeur de la page */
   padding: 20px; /* Espace autour du menu */
   display: flex;
+  justify-content: center; /* Centre le contenu horizontalement */
+  align-items: center; /* Centre le contenu verticalement */
   box-sizing: border-box; /* Pour inclure le padding dans la largeur du header */
+  z-index: 200; /* Assure que le menu est toujours au-dessus des autres éléments */
 }
 
 .menu-container {
   display: flex;
   align-items: center;
-  margin-left: 915px;
+  justify-content: center; /* Centre le contenu horizontalement */
 }
 
 .menu-icon {

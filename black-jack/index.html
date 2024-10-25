@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack</title>
+    <link rel="shortcut icon" type="image/jpg" href="css/card-library/images/poker-flav.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Great+Vibes&family=Tangerine:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/card-library/css/cardstarter.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script defer src="js/main.js"></script>
+</head>
+
+<body>
+    <header>
+        <div id="menu-container">
+            <span id="menu-icon"><a href="../index.html">☰</a></span>
+        </div>
+    </header>
+    <div id="user-msg">
+        <p>Main du joueur</p>
+    </div>
+    <div id="display-msg">
+    </div>
+    <button id="play-again" class="hidden">Prochaine main</button>
+    <div id="dealer-msg">
+        <p>La main du croupier</p>
+    </div>
+    <div id="u-cards"></div>
+    <div id="deck" class=""><img src="css/card-library/images/pngwing.com.png" alt=""></div>
+    <div id="d-cards"></div>
+    <div id="rules-darkmode">
+        <button id="rules-btn" class="button-56 hidden">Comment jouer</button>
+        <input type="checkbox" id="dark-mode-checkbox">
+    </div>
+    <ul id="rules-list">
+        <li>1. Miser </li>
+        <li>2. Rester ou Tirrer </li>
+        <li>3. Etre plus proche de 21 que le croupier</li>
+        <li>4. Gagnez ou Perdez</li>
+    </ul>
+    <div id="credit-card"></div>
+
+    <div id="hit-div"><button class="button-56" id="hit-btn">Tirrer</button></div>
+    <div id="wager-msg" class="flex-ctr">
+        <form action="">
+            <button class="button-56" id="wager-btn">Miser</button>
+            <input id="wager-input" type="number" placeholder="Bet" value="10">
+        </form>
+    </div>
+    <div id="stay-div"><button class="button-56" id="stay-btn">Rester</button></div>
+    <div id="wallet-wager-msg">
+        <div id="wallet-info">
+            <p id="wager-amt">Mise: <span>$50</span></p>
+            <p id="wallet-amt">Portefeuille: <span id="wallet-span">$1000</span></p>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -214,3 +214,13 @@ footer {
     background-size: 400% 400%; /* Pour permettre à l'animation de bouger */
     animation: gradient-animation 10s ease infinite; /* Durée et type d'animation */
 }
+.mafia {
+    background: linear-gradient(270deg, rgba(15,121,96,1), rgba(56,96,134,1), rgba(15,121,96,1), rgba(56,96,134,1));
+    background-size: 400% 400%; /* Pour permettre à l'animation de bouger */
+    animation: gradient-animation 10s ease infinite; /* Durée et type d'animation */
+}
+.Black-jack {
+    background: linear-gradient(270deg, #b80000, #000000, #b80000, #000000);
+    background-size: 400% 400%; /* Pour permettre à l'animation de bouger */
+    animation: gradient-animation 10s ease infinite; /* Durée et type d'animation */
+}

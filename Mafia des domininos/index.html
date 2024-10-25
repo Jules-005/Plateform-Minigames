@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mafia des dominos</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <header>
+        <div id="logo">Un Reymond Qui Joue</div>
+        <div id="menu-container">
+            <span id="menu-icon"><a href="../index.html">☰</a></span>
+        </div>
+    </header>    <main id="gameFrame" class="firstGame" onclick="myShootingEffects()">
+
+        <div id="healthBar"></div>
+      
+        <div class="ennemy" style="left: 030px;"></div>
+        <div class="ennemy" style="left: 200px;"></div>
+        <div class="ennemy" style="left: 330px;"></div>
+        <div class="ennemy" style="left: 430px;"></div>
+        <div class="ennemy" style="left: 500px;"></div>
+        <div class="ennemy" style="left: 640px;"></div>
+      
+        <button onclick="newGame()" id="newGame">
+      
+          <span class="messageWon">
+            <span class="emoji">👏</span> Bien joué!
+          </span>
+          <span class="messageDead">
+            <span class="emoji">😵</span> Dommage…
+          </span>
+          <span class="messageWelcome">
+            <span class="emoji">🤖</span> Bienvenue
+          </span>
+      
+          <p>👉 Nouvelle game</p>
+          <script src="script.js"></script>
+        </button>
+      
+      </main>
+      
+</body>
+</html>

@@ -1,0 +1,320 @@
+body {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 3fr 4fr 4fr;
+    font-family: 'Tangerine', cursive;
+    box-sizing: border-box;
+    color: rgb(58, 58, 60);
+    margin: 0 auto;
+    background: linear-gradient(270deg, #ff8787, #ffffff, #ff8787, #ffffff);
+            background-size: 400% 400%; /* Pour permettre à l'animation de bouger */
+            animation: gradient-animation 20s ease infinite; /* Durée et type d'animation */
+}
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%; /* Début de l'animation */
+    }
+    50% {
+        background-position: 100% 50%; /* Milieu de l'animation */
+    }
+    100% {
+        background-position: 0% 50%; /* Fin de l'animation */
+    }
+}
+#display-msg {
+    grid-column: 3;
+    grid-row: 2;
+    font-size: 3.5vmin;
+    margin-top: 3vmin;
+    text-align: center;
+    font-family: 'ADLaM Display', cursive;
+}
+
+#user-msg {
+    grid-column: 1 / 3;
+    grid-row: 1;
+    font-size: 7vmin;
+    align-items: end;
+    color: #557A46;
+}
+
+div p:first-child {
+
+    border-radius: 25%;
+}
+
+#dealer-msg {
+    grid-column: 4 / 6;
+    grid-row: 1;
+    font-size: 7vmin;
+    align-items: end;
+    font-size: 7vmin;
+    color: #CD1818;
+}
+
+#u-cards {
+    grid-column: 1 / 3;
+    grid-row: 2;
+    justify-content: start;
+    margin-left: 5vmin;
+}
+
+#deck {
+    grid-column: 1; /* Colonne de gauche */
+    grid-row: 3; /* Sur la même ligne que le portefeuille */
+    align-self: start; /* Aligne le deck en haut de sa cellule */
+    margin-left: 5vmin; /* Ajuste la marge à gauche */
+    margin-top: -140px; /* Ajuste si nécessaire pour remonter l'image */
+}
+
+#d-cards {
+    grid-column: 4 / 6;
+    grid-row: 2;
+    justify-content: start;
+    height: 38vmin;
+}
+
+#controls {
+    grid-column: 1;
+    grid-row: 3;
+}
+
+#hit-div {
+    grid-column: 2;
+    grid-row: 3;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+#hit-btn {
+    display: none;
+}
+
+#stay-btn {
+    display: none;
+}
+
+#wager-msg {
+    grid-column: 3;
+    grid-row: 3;
+}
+
+#wallet-wager-msg {
+    grid-column: 5;
+    grid-row: 3;
+    align-items: start;
+    justify-content: start;
+    margin-top: -10vmin;
+    font-size: 3.5vmin;
+}
+
+#wallet-wager-msg div {
+    border: 0.5vmin solid;
+    padding-left: 1vmin;
+}
+
+#stay-div {
+    grid-column: 4;
+    grid-row: 3;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+h2 {
+    margin-left: 5.5vmin;
+    font-size: 6.5vmin;
+}
+
+#wager-input {
+    margin-top: 4vmin;
+    height: 7vmin;
+    border: 0.5vmin solid rgb(41, 79, 76);
+    border-radius: 10%;
+    background-color: rgb(241, 231, 231);
+    font-family: 'ADLaM Display', cursive;
+    font-size: 3.5vmin;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 15vmin;
+}
+#dark-mode-checkbox{
+    display: none;
+}
+form>button,
+form>input {
+    display: flex;
+    justify-content: center;
+}
+
+#wager-input:hover {
+    border: 0.5vmin solid rgb(0, 0, 1);
+}
+
+#wager-input::placeholder {
+    text-align: center;
+}
+
+#wallet-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    padding-right: 10vmin;
+    border-radius: 5%;
+
+}
+
+div {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+}
+
+img {
+    height: 35vmin;
+    width: 35vmin;
+}
+
+.button-56 {
+    align-items: center;
+    background-color: #1ba7a9;
+    border: 2px solid #111;
+    border-radius: 8px;
+    box-sizing: border-box;
+    color: #111;
+    cursor: pointer;
+    display: flex;
+    font-family: 'ADLaM Display', cursive;
+    font-size: 16px;
+    height: 48px;
+    justify-content: center;
+    line-height: 24px;
+    max-width: 100%;
+    padding: 0 25px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-56:after {
+    background-color: #111;
+    border-radius: 8px;
+    content: "";
+    display: block;
+    height: 48px;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    top: -2px;
+    transform: translate(8px, 8px);
+    transition: transform .2s ease-out;
+    z-index: -1;
+}
+
+.button-56:hover:after {
+    transform: translate(0, 0);
+}
+
+.button-56:active {
+    background-color: #ffdeda;
+    outline: 0;
+}
+
+.button-56:hover {
+    outline: 0;
+}
+
+@media (min-width: 768px) {
+    .button-56 {
+        padding: 0 40px;
+    }
+}
+
+#stay-btn {
+    background-color: rgb(190, 80, 50);
+}
+
+#wager-btn {
+    background-color: rgb(60, 60, 60);
+    color: rgb(220, 232, 235);
+}
+
+#play-again {
+    grid-column: 3;
+    grid-row: 2;
+    height: 15vmin;
+    width: 15vmin;
+    border-radius: 50%;
+    margin: 15vmin auto;
+    font-size: 1.8vmin;
+    font-family: 'ADLaM Display', cursive;
+    background-color: rgb(227, 229, 230);
+    border: 4px solid rgb(60, 60, 60);
+}
+
+#play-again:hover {
+    border: 5px solid black;
+}
+
+#rules-list {
+    grid-column: 3;
+    grid-row: 2;
+    font-size: 1.7vmin;
+    line-height: 5vmin;
+    color: black;
+    font-family: 'ADLaM Display', cursive;
+    margin-top: 7vmin;
+    list-style-type: none; /* Ajoute cette ligne pour retirer les points */
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+#rules-btn {
+    margin-top: 10vmin;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    margin-top: 0;
+    position: fixed; /* Fixe l'en-tête en haut de la page */
+    top: 0; /* Assure que l'en-tête est en haut */
+    width: 100%; /* Prend toute la largeur */
+    z-index: 100; /* Définit un z-index élevé pour s'assurer qu'il est au-dessus */
+}
+
+#menu-container {
+    display: flex;            /* Utiliser Flexbox */
+    justify-content: center;  /* Centre horizontalement */
+    align-items: center;      /* Centre verticalement (si nécessaire) */
+    width: 100%;             /* Prend toute la largeur */
+}
+
+#menu-icon {
+    font-size: 50px;
+    cursor: pointer;
+    color: #000000;
+}
+
+#menu-icon:hover {
+    transform: scale(1.12); /* Effet de zoom sur hover */
+  }
+
+a{
+  text-decoration: none;
+  color: black;
+}
