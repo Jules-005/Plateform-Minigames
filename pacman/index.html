@@ -1,0 +1,221 @@
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Changa+One&family=Press+Start+2P&display=swap"
+  rel="stylesheet"
+/>
+
+<style>
+  .score {
+    color: white; /* Couleur du texte du score */
+    font-size: 20px; /* Taille du texte */
+    margin-right: 50px;
+  }
+
+  body {
+    margin: 0;
+    background-color: black;
+    padding: 10px 20px;
+    font-family: 'Press Start 2P', sans-serif;
+  }
+  
+  .ody {
+    display: flex;
+    justify-content: center;  /* Center horizontally */
+    align-items: center;      /* Center vertically */
+    height: calc(100vh - 50px); /* Réduit la hauteur pour tenir compte des contrôles */
+    overflow: hidden; /* Empêche le débordement */
+    margin: 0;               /* Remove default margin */
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    margin-top: 10px;
+    position: fixed; /* Fixe l'en-tête en haut de la page */
+    top: 0; /* Assure que l'en-tête est en haut */
+    width: 100%; /* Prend toute la largeur */
+    z-index: 100; /* Définit un z-index élevé pour s'assurer qu'il est au-dessus */
+  }
+
+  #logo {
+    font-size: 48px;
+    margin: 14px;
+    flex-grow: 1;
+    color: #ffffff;
+  }
+
+  #menu-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  #menu-icon {
+    font-size: 50px;
+    cursor: pointer;
+    margin-right: 100px;
+    color: #ffffff;
+  }
+
+  #menu-icon:hover {
+    transform: scale(1.12); /* Effet de zoom sur hover */
+  }
+
+  #overlay {
+    display: none; /* Masqué par défaut */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255); /* Assurez-vous que la couleur est semi-transparente */
+    z-index: 10;
+  }
+
+  a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+  }
+  #controle {
+    background-color: #666666;
+    padding: 10px; /* Réduire le padding interne */
+    margin-top: 5px; /* Réduire la marge au-dessus */
+    border-radius: 8px;
+    text-align: left;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+#controle h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+#controle ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 5px; /* Réduire l’espace entre le titre et la liste */
+}
+
+#controle li {
+    font-size: 16px;
+    margin: 3px 0; /* Réduire l’espacement entre les lignes de contrôle */
+}
+
+.touche {
+    display: inline-block;
+    padding: 3px 6px; /* Réduire la taille du badge de touche */
+    background-color: #464646;
+    border-radius: 4px;
+    font-weight: bold;
+    color: #ffffff;
+}
+</style>
+
+<header>
+  <div id="logo">Un Reymond Qui Joue</div>
+  <div id="menu-container">
+      <span id="menu-icon"><a href="../index.html">☰</a></span>
+  </div>
+</header> 
+
+<div class="ody">
+  <p class="flex items-center justify-between" style="color: white; font-size: 14px; margin-bottom: 6px">
+    <span class="score"><span>Score:</span><span id="scoreEl">0</span></span>
+    <div>
+      <!-- pause icon -->
+      <svg
+        id="pauseButton"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="w-5 h-5 cursor-pointer hidden"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zM9 8.25a.75.75 0 00-.75.75v6c0 .414.336.75.75.75h.75a.75.75 0 00.75-.75V9a.75.75 0 00-.75-.75H9zm5.25 0a.75.75 0 00-.75.75v6c0 .414.336.75.75.75H15a.75.75 0 00.75-.75V9a.75.75 0 00-.75-.75h-.75z"
+          clip-rule="evenodd"
+        />
+      </svg>
+      <!-- /pause icon -->
+    </div>
+  </p>
+
+  <div class="relative">
+    <div class="absolute inset-0 flex flex-col items-center justify-center">
+      <div
+        id="startScreen"
+        class="bg-black/75 p-4 border-4 border-yellow-400 rounded text-center max-w-xs w-full"
+      >
+        <h1 class="text-white text-3xl mb-2">PacMan</h1>
+        <button
+          id="startButton"
+          class="text-black text-sm bg-yellow-400 px-4 py-2 rounded-full hover:bg-yellow-300"
+        >
+          Start Game
+        </button>
+      </div>
+
+      <!-- game over screen -->
+      <div
+        id="gameOverScreen"
+        class="bg-black/75 p-4 border-4 border-yellow-400 rounded text-center max-w-xs w-full hidden"
+      >
+        <p class="text-white text-xs mb-2">Game Over</p>
+        <h1 id="gameOverScoreLabel" class="text-white text-3xl">Score</h1>
+        <p class="text-white text-[10px] mb-2">Score</p>
+        <button
+          id="restartGameButton"
+          class="text-black text-xs bg-yellow-400 px-4 py-2 rounded-full hover:bg-yellow-300"
+        >
+          Restart Game
+        </button>
+      </div>
+      <!-- /game over screen -->
+
+      <!-- ready tag -->
+      <div
+        id="readyTag"
+        class="bg-black/75 p-4 border-4 border-yellow-400 rounded text-center max-w-xs w-full hidden"
+      >
+        <h1 class="text-white text-xl">Ready?</h1>
+      </div>
+      <!-- /ready tag -->
+
+      <!-- go tag -->
+      <div
+        id="goTag"
+        class="bg-black/75 p-4 border-4 border-yellow-400 rounded text-center max-w-xs w-full hidden"
+      >
+        <h1 class="text-white text-xl">Go!</h1>
+      </div>
+      <!-- /go tag -->
+    </div>
+    <canvas style="display: block; margin: 0 auto"></canvas>
+  </div>
+</div>
+<div id="controle">
+  <h3>Contrôles :</h3>
+  <ul>
+      <li><span class="touche">Z</span> — Aller en haut</li>
+      <li><span class="touche">S</span> — Aller en bas</li>
+      <li><span class="touche">Q</span> — Aller à gauche</li>
+      <li><span class="touche">D</span> — Aller à droite</li>
+  </ul>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js" integrity="sha512-xi/RZRIF/S0hJ+yJJYuZ5yk6/8pCiRlEXZzoguSMl+vk2i3m6UjUO/WcZ11blRL/O+rnj94JRGwt/CHbc9+6EA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="./js/audio.js"></script>
+<script src="./js/utils.js"></script>
+<script src="./js/classes/Boundary.js"></script>
+<script src="./js/classes/Ghost.js"></script>
+<script src="./js/classes/Pellet.js"></script>
+<script src="./js/classes/Player.js"></script>
+<script src="./js/classes/PowerUp.js"></script>
+<script src="./js/classes/Item.js"></script>
+<script src="./js/eventListeners.js"></script>
+<script src="./js/setup.js"></script>
+<script src="index.js"></script>

@@ -252,3 +252,8 @@ footer {
     background-size: 400% 400%; /* Pour permettre à l'animation de bouger */
     animation: gradient-animation 10s ease infinite; /* Durée et type d'animation */
 }
+.pacman{
+    background: linear-gradient(270deg, #000000, #1525ff, #000000, #1525ff);
+    background-size: 400% 400%; /* Pour permettre à l'animation de bouger */
+    animation: gradient-animation 10s ease infinite; /* Durée et type d'animation */
+}
