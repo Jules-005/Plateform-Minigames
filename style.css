@@ -242,3 +242,8 @@ footer {
     background-size: 400% 400%; /* Pour permettre à l'animation de bouger */
     animation: gradient-animation 10s ease infinite; /* Durée et type d'animation */
 }
+.memory{
+    background: linear-gradient(270deg, #004d4d, #1a001a, #004d4d, #1a001a);
+    background-size: 400% 400%; /* Pour permettre à l'animation de bouger */
+    animation: gradient-animation 10s ease infinite; /* Durée et type d'animation */
+}
