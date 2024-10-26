@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Arcade-Mario</title>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <style>
+        body{
+            background: linear-gradient(270deg, #87CEEB, #4CAF50, #87CEEB, #4CAF50); /* Sky blue and green gradient */
+            background-size: 400% 400%;
+            animation: gradient-animation 10s ease infinite;
+        }
+@keyframes gradient-animation {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
+}
+            /* Set the body to use Flexbox to center the canvas */
+            .ody {
+                display: flex;
+                justify-content: center;  /* Center horizontally */
+                align-items: center;      /* Center vertically */
+                height: calc(100vh - 50px); /* Réduit la hauteur pour tenir compte des contrôles */
+                overflow: hidden; /* Empêche le débordement */
+                margin: 0;               /* Remove default margin */
+            }
+            canvas {
+                border: 2px solid #000;  /* Optional: add a border around the canvas */
+            }
+header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    margin-top: 10px;
+    position: fixed; /* Fixe l'en-tête en haut de la page */
+    top: 0; /* Assure que l'en-tête est en haut */
+    width: 100%; /* Prend toute la largeur */
+    z-index: 100; /* Définit un z-index élevé pour s'assurer qu'il est au-dessus */
+}
+
+
+#logo {
+    font-size: 48px;
+    margin: 14px;
+    flex-grow: 1;
+    color: #000000;
+}
+
+#menu-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+#menu-icon {
+    font-size: 50px;
+    cursor: pointer;
+    margin-right: 100px;
+    color: #000000;
+}
+#menu-icon:hover {
+    transform: scale(1.12); /* Effet de zoom sur hover */
+  }
+#overlay {
+    display: none; /* Masqué par défaut */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Assurez-vous que la couleur est semi-transparente */
+    z-index: 10;
+}
+a{
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+#controle {
+    background-color: #c7ffc2;
+    padding: 10px; /* Réduire le padding interne */
+    margin-top: 5px; /* Réduire la marge au-dessus */
+    border-radius: 8px;
+    text-align: left;
+    font-family: Arial, sans-serif;
+}
+
+#controle h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+#controle ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 5px; /* Réduire l’espace entre le titre et la liste */
+}
+
+#controle li {
+    font-size: 16px;
+    margin: 3px 0; /* Réduire l’espacement entre les lignes de contrôle */
+}
+
+.touche {
+    display: inline-block;
+    padding: 3px 6px; /* Réduire la taille du badge de touche */
+    background-color: #ddd;
+    border-radius: 4px;
+    font-weight: bold;
+    color: #333;
+}
+
+
+        </style>
+	</head>
+	<body>
+        <header>
+            <div id="logo">Un Reymond Qui Joue</div>
+            <div id="menu-container">
+                <span id="menu-icon"><a href="../index.html">☰</a></span>
+            </div>
+        </header> 
+        <div class="ody">
+		<canvas id="canvas" width="640" height="480">
+			<p>Your browser does not support the canvas element.</p>
+		</canvas>
+
+        <!-- Enjine Includes -->
+        <script src="Enjine/core.js"></script>
+        <script src="Enjine/gameCanvas.js"></script>
+        <script src="Enjine/keyboardInput.js"></script>
+        <script src="Enjine/resources.js"></script>
+        <script src="Enjine/drawable.js"></script>
+        <script src="Enjine/state.js"></script>
+        <script src="Enjine/gameTimer.js"></script>
+        <script src="Enjine/camera.js"></script>
+        <script src="Enjine/drawableManager.js"></script>
+        <script src="Enjine/sprite.js"></script>
+        <script src="Enjine/spriteFont.js"></script>
+        <script src="Enjine/frameSprite.js"></script>
+        <script src="Enjine/animatedSprite.js"></script>
+        <script src="Enjine/collideable.js"></script>
+        <script src="Enjine/application.js"></script>
+
+        <!-- Actual game code -->
+        <script src="code/setup.js"></script>
+        <script src="code/spriteCuts.js"></script>
+        <script src="code/level.js"></script>
+        <script src="code/backgroundGenerator.js"></script>
+        <script src="code/backgroundRenderer.js"></script>
+        <script src="code/improvedNoise.js"></script>
+        <script src="code/notchSprite.js"></script>
+        <script src="code/character.js"></script>
+        <script src="code/levelRenderer.js"></script>
+        <script src="code/levelGenerator.js"></script>
+        <script src="code/spriteTemplate.js"></script>
+        <script src="code/enemy.js"></script>
+        <script src="code/fireball.js"></script>
+        <script src="code/sparkle.js"></script>
+        <script src="code/coinAnim.js"></script>
+        <script src="code/mushroom.js"></script>
+		<script src="code/particle.js"></script>
+		<script src="code/fireFlower.js"></script>
+        <script src="code/bulletBill.js"></script>
+        <script src="code/flowerEnemy.js"></script>
+        <script src="code/shell.js"></script>
+
+        <script src="code/titleState.js"></script>
+        <script src="code/loadingState.js"></script>
+        <script src="code/loseState.js"></script>
+        <script src="code/winState.js"></script>
+        <script src="code/mapState.js"></script>
+        <script src="code/levelState.js"></script>
+
+        <script src="code/music.js"></script>
+
+        <script>$(document).ready(function() { new Enjine.Application().Initialize(new Mario.LoadingState(), 320, 240) });</script>
+    </div> 
+    <div id="controle">
+        <h3>Contrôles :</h3>
+        <ul>
+            <li><span class="touche">Flèche Haut</span> ou <span class="touche">Z</span> ou <span class="touche">Espace</span> — Sauter</li>
+            <li><span class="touche">Flèche Bas</span> ou <span class="touche">S</span> — S'accroupir</li>
+            <li><span class="touche">Flèche Gauche</span> ou <span class="touche">Q</span> — Aller à gauche</li>
+            <li><span class="touche">Flèche Droite</span> ou <span class="touche">D</span> — Aller à droite</li>
+            <li><span class="touche">A</span> — Courir</li>
+            <li><span class="touche">E</span> ou <span class="touche">Clic gauche</span> — Lancer un projectile</li>
+            <li><h3>Dans le menue des niveaux les touches utilisable sont:</h3></li>
+            <li><span class="touche">S</span> — Rentrer dans un niveau</li>
+            <li>Les flèches pour se déplacer</li>
+            <li><h2>Attention ce jeu contien du son!!!</h2></li>
+        </ul>
+    </div>
+    
+	</body>
+</html>
